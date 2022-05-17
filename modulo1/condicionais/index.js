@@ -116,43 +116,28 @@ const quantidadeDeIngressos = Number(prompt("Qual a quantidade de ingressos? "))
 const dadosDaCompra = (` ---Dados da compra--- \n Nome do cliente:${nome} \n Tipo do Jogo: ${tipoDeJogo}
  Etapa do jogo: ${etapaDoJogo} \n Categoria: ${categoria} \n Quantidade de Ingressos: ${quantidadeDeIngressos}`)
 
+const dolar = 4.1
 let valorDoIngresso 
 let valorTotal 
-let valores = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorTotal}`)
+let valoresEmReal = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorTotal*quantidadeDeIngressos}`)
+let valoresEmDolar = (`---Valores--- \n Valor do ingresso: U$ ${valorDoIngresso} \n Valor total: U$ ${valorTotal*quantidadeDeIngressos}`)
 
-const dolar = 4.1
 
 
 if (tipoDeJogo==="DO") {
     if (etapaDoJogo === "SF") {
         switch (categoria) {
             case "1":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 1320
-                valorTotal = quantidadeDeIngressos * valorDoIngresso 
-                valores = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "2":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 880
-                valorTotal = quantidadeDeIngressos * valorDoIngresso
-                valores = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "3":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 550
-                valorTotal = quantidadeDeIngressos * valorDoIngresso
-                valores = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "4":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 220
-                valorTotal = quantidadeDeIngressos * valorDoIngresso
-                valores = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorTotal}`)
-                console.log(valores)
                 break;
             default:
                 break;
@@ -160,32 +145,16 @@ if (tipoDeJogo==="DO") {
     } else if (etapaDoJogo === "DT") {
         switch (categoria) {
             case "1":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 660
-                valorTotal = quantidadeDeIngressos * valorDoIngresso
-                valores = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "2":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 440
-                valorTotal = quantidadeDeIngressos * valorDoIngresso
-                valores = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "3":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 330
-                valorTotal = quantidadeDeIngressos * valorDoIngresso
-                valores = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "4":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 170
-                valorTotal = quantidadeDeIngressos * valorDoIngresso
-                valores = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorTotal}`)
-                console.log(valores)
                 break;
             default:
                 break;
@@ -193,100 +162,54 @@ if (tipoDeJogo==="DO") {
     } else if (etapaDoJogo === "FI") {
         switch (categoria) {
             case "1":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 1980
-                valorTotal = quantidadeDeIngressos * valorDoIngresso
-                valores = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "2":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 1320
-                valorTotal = quantidadeDeIngressos * valorDoIngresso
-                valores = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "3":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 880
-                valorTotal = quantidadeDeIngressos * valorDoIngresso
-                valores = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "4":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 330
-                valorTotal = quantidadeDeIngressos * valorDoIngresso
-                valores = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorTotal}`)
-                console.log(valores)
                 break;
             default:
                 break;
         }
     }
+    console.log(dadosDaCompra)
+    valoresEmReal = (`---Valores--- \n Valor do ingresso: R$ ${valorDoIngresso} \n Valor total: R$ ${valorDoIngresso*quantidadeDeIngressos}`)
+    console.log(valoresEmReal)
 } else {
     if (etapaDoJogo === "SF") {
         switch (categoria) {
             case "1":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 1320 / dolar
-                valorTotal = quantidadeDeIngressos * valorDoIngresso 
-                valores = (`---Valores--- \n Valor do ingresso: U$ ${valorDoIngresso} \n Valor total: U$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "2":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 880 / dolar
-                valorTotal = quantidadeDeIngressos * valorDoIngresso 
-                valores = (`---Valores--- \n Valor do ingresso: U$ ${valorDoIngresso} \n Valor total: U$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "3":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 550 / dolar
-                valorTotal = quantidadeDeIngressos * valorDoIngresso 
-                valores = (`---Valores--- \n Valor do ingresso: U$ ${valorDoIngresso} \n Valor total: U$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "4":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 220 / dolar
-                valorTotal = quantidadeDeIngressos * valorDoIngresso 
-                valores = (`---Valores--- \n Valor do ingresso: U$ ${valorDoIngresso} \n Valor total: U$ ${valorTotal}`)
-                console.log(valores)
-                break;
             default:
                 break;
         } 
     } else if (etapaDoJogo === "DT") {
         switch (categoria) {
             case "1":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 660 / dolar
-                valorTotal = quantidadeDeIngressos * valorDoIngresso 
-                valores = (`---Valores--- \n Valor do ingresso: U$ ${valorDoIngresso} \n Valor total: U$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "2":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 440 / dolar
-                valorTotal = quantidadeDeIngressos * valorDoIngresso 
-                valores = (`---Valores--- \n Valor do ingresso: U$ ${valorDoIngresso} \n Valor total: U$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "3":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 330 / dolar
-                valorTotal = quantidadeDeIngressos * valorDoIngresso 
-                valores = (`---Valores--- \n Valor do ingresso: U$ ${valorDoIngresso} \n Valor total: U$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "4":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 170 / dolar
-                valorTotal = quantidadeDeIngressos * valorDoIngresso 
-                valores = (`---Valores--- \n Valor do ingresso: U$ ${valorDoIngresso} \n Valor total: U$ ${valorTotal}`)
-                console.log(valores)
                 break;
             default:
                 break;
@@ -294,39 +217,25 @@ if (tipoDeJogo==="DO") {
     } else if (etapaDoJogo === "FI") {
         switch (categoria) {
             case "1":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 1980 / dolar
-                valorTotal = quantidadeDeIngressos * valorDoIngresso 
-                valores = (`---Valores--- \n Valor do ingresso: U$ ${valorDoIngresso} \n Valor total: U$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "2":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 1320 / dolar
-                valorTotal = quantidadeDeIngressos * valorDoIngresso 
-                valores = (`---Valores--- \n Valor do ingresso: U$ ${valorDoIngresso} \n Valor total: U$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "3":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 880 / dolar
-                valorTotal = quantidadeDeIngressos * valorDoIngresso 
-                valores = (`---Valores--- \n Valor do ingresso: U$ ${valorDoIngresso} \n Valor total: U$ ${valorTotal}`)
-                console.log(valores)
                 break;
             case "4":
-                console.log(dadosDaCompra)
                 valorDoIngresso = 330 / dolar
-                valorTotal = quantidadeDeIngressos * valorDoIngresso 
-                valores = (`---Valores--- \n Valor do ingresso: U$ ${valorDoIngresso} \n Valor total: U$ ${valorTotal}`)
-                console.log(valores)
                 break;
             default:
                 break;
         }
     }
+    console.log(dadosDaCompra)
+    valoresEmDolar = (`---Valores--- \n Valor do ingresso: U$ ${valorDoIngresso} \n Valor total: U$ ${valorDoIngresso*quantidadeDeIngressos}`)
+    console.log(valoresEmDolar)
 }
-
 
 
 
