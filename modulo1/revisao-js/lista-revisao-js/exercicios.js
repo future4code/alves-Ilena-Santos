@@ -15,7 +15,7 @@ function retornaArrayInvertido(array) {
 
 // EXERCÍCIO 03
 function retornaArrayOrdenado(array) {
-    array.sort(function(a,b){
+    array.sort(function (a, b) {
         return a - b
     })
     return array
@@ -23,7 +23,13 @@ function retornaArrayOrdenado(array) {
 
 // EXERCÍCIO 04
 function retornaNumerosPares(array) {
-
+    let novoArray = []
+    for (let numero of array) {
+        if (numero % 2 === 0) {
+            let numerosPares = novoArray.push(numero)
+        }
+    }
+    return novoArray
 }
 
 // EXERCÍCIO 05
