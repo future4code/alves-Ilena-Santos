@@ -98,6 +98,11 @@ function classificaTriangulo(ladoA, ladoB, ladoC) {
 
 // EXERCÍCIO 10
 function retornaSegundoMaiorESegundoMenor(array) {
+    array.sort((a, b) => a - b)
+    segundoMaior = array[array.length - 2]
+    segundoMenor = array[1]
+    novoArray = [segundoMaior, segundoMenor]
+    return novoArray
 
 }
 
@@ -146,7 +151,14 @@ function retornaContasComSaldoAtualizado(contas) {
 
 // EXERCÍCIO 15A
 function retornaArrayOrdenadoAlfabeticamente(consultas) {
-
+    let pacientesEmOrdem = consultas.map((paciente) => {
+        return paciente.nome 
+    })
+    let novoArray = {
+        ... consultas,
+        nome: pacientesEmOrdem.sort(), 
+    }
+    return novoArray
 }
 
 // EXERCÍCIO 15B
