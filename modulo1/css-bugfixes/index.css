@@ -73,6 +73,7 @@ div img {
 }
 
 #container-de-descricao>p {
+
     text-align: justify;
 }
 
@@ -110,7 +111,9 @@ div:last-child {
 table {
     width: 60%;
 }
-
+td {
+    text-align: center;
+}
 td button {
     background-color: #fadf63;
     width: 150px;
