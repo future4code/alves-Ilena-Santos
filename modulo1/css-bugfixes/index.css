@@ -72,6 +72,9 @@ div img {
     padding-top: 100px;
 }
 
+#container-de-descricao>p {
+    text-align: justify;
+}
 
 #container-de-descricao>ol {
     padding: 15px 0px;
