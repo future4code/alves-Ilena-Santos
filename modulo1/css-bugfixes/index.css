@@ -109,17 +109,20 @@ div:last-child {
 table {
     width: 60%;
 }
+
 td {
+    font-family: 'Roboto', sans-serif;
     text-align: center;
 }
+
 td button {
     background-color: #fadf63;
     width: 150px;
     height: 30px;
     border-radius: 5px;
     color: black;
-
 }
+
 td button:hover{
     background-color:#d1ac07;
 }
@@ -140,6 +143,7 @@ input {
 }
 
 #back-button {
+    display: block;
     background-color: white;
     width: 100px;
     height: 20px;
@@ -147,6 +151,10 @@ input {
     border-radius: 5px;
     font-size: 10px;
     color: black;
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+    top: 50px;
 }
 
 #back-button:hover {
