@@ -80,6 +80,7 @@ div>p:first-child {
 }
 
 #container-para-comprar {
+    padding-top: 200px;
     background-color: #e7eb90;
     
 }
@@ -90,6 +91,7 @@ div>p:first-child {
     font-size: 60px;
 }
 .descer-botao{
+    padding-top:50px;
     display: block;   
     text-align: center; 
 }
