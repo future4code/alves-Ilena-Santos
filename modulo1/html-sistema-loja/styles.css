@@ -1,0 +1,19 @@
+body {
+    background-color: rgb(241, 205, 138);
+}
+
+a {
+    color: black;
+    background-color:orange;
+}
+
+.tipo-1 {
+    background-color: rgb(224, 153, 71);
+}
+
+button {
+    background-color: orange;
+}
+td{
+    color: red;
+}
