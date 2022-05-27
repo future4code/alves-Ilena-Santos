@@ -1,0 +1,20 @@
+main{
+    background-color: rgb(255, 196, 174);
+}
+
+h1 {
+    color: orangered;
+}
+
+button:hover {
+    background-color: orangered;
+    color: white;
+}
+
+h1,nav{
+    display: inline;
+}
+nav{
+    position: relative;
+    left: center;
+}
