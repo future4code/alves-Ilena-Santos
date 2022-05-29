@@ -5,15 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css" > 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Titillium+Web:wght@200&display=swap" rel="stylesheet">
     <title>Ilena Acioli | Home</title>
 </head>
 <body>
     <header>
-        <h1>Home</h1>
+        <h1>HOME</h1>
         <nav>
-            <a href="/sobre-mim.html"><button> Sobre mim </button></a>
-            <a href="/projetos.html"><button> Projetos </button></a>
-            <a href="/contato.html"><button> Contato </button></a>
+            <a href="/sobre-mim.html"><button class="aumenta-botao"> Sobre mim </button></a>
+            <a href="/projetos.html"><button class="aumenta-botao"> Projetos </button></a>
+            <a href="/contato.html"><button class="aumenta-botao"> Contato </button></a>
         </nav>
     </header>
     <main>
@@ -21,26 +24,33 @@
             <!-- Inserir foto minha -->
         </section>
         <section>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad officia ipsum consequuntur sunt doloribus tempora. Aut ipsa voluptates quaerat id provident, aliquam sequi recusandae nulla ratione nostrum hic amet. Placeat.</p>
+            <p class="texto-home">Olá, me chamo Ilena, tudo bem com você? Espero que sim! Será um prazer te mostrar um pouco mais sobre mim e sobre meu trabalho como desenvolvedora. Vamos nessa? </p>
         </section>
-        <section>
+        <section class="section-tabela">
             <table>
                 <tr>
-                    <th>Engenheira Civil</th>
                     <th>Desenvolvedora Front-end</th>
                 </tr>
                 <tr>
-                    <td>Lorem ipsum dolor sit </td>
-                    <td>Lorem ipsum dolor </td>
+                    <td>Linguagens:</td>
+                </tr>
+                <tr>
+                    <td>HTML, CSS e JavaScript</td>
+                </tr>
+                <tr>
+                    <td>Ferramentas:</td>
+                </tr>
+                <tr>
+                    <td>Github, Gitbash e VSCode</td>
                 </tr>
             </table>
         </section>
     </main>
     <footer>
-        <p>Siga-nos nas redes sociais!</p>
-        <img src="img\instagram.png" alt="ícone do instagram"/>
-        <img src="img\twitter.png" alt="ícone do twitter"/>
-        <img src="img\facebook.png" alt="ícone do facebook"/>
+        <p class="texto-rodape">Me siga nas redes sociais!</p>
+        <a href="https://www.instagram.com/ilenaacioli/" target="_blank" rel="noopener noreferrer"><img src="img\instagram.png" alt="ícone do instagram"/></a>
+        <a href="https://twitter.com/ilenaacioli" target="_blank" rel="noopener noreferrer"><img src="img\twitter.png" alt="ícone do twitter"/></a>
+        <a href="https://www.facebook.com/ilena.santos" target="_blank" rel="noopener noreferrer"><img src="img\facebook.png" alt="ícone do facebook"/></a>
     </footer>
 </body>
 </html>
