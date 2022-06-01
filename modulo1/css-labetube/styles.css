@@ -79,3 +79,12 @@ img{
     padding: 0;
     gap: 0;
 }
+
+
+@media screen and (min-device-width:320px) and (max-device-width:480px){
+    main{
+        display: flex;
+        flex-wrap: wrap;
+    }
+  
+}
