@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px 0 16px;
+    background-color: mediumvioletred;
+    height: 50px;
+}
+
+.agrupa-texto-img{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+#logo{
+    width: 18px;
+}
+
+
+
+main {
+    height: 100vh;
+    display: flex;
+    gap: 16px;
+    flex-grow: 3;
+}
+
+nav {
+    flex-basis: 300px;
+    background-color: #f2d0e0;
+}
+
+
+li{
+    padding-bottom: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+
+}
+
+
+#icone-nav{
+    width: 15px;  
+}
+
+
+
+section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+    /* gap é opcional pro exercício, eu só quis colocar pra separar um pouco os elementos */
+    column-gap: 40px;
+}
+
+#configura-imagens {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 0 1 auto;
+    box-shadow:5px 5px 5px darkgray;
+    width: 200px;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+h2 {
+    text-align: center;
+}
+
+footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 16px 0 16px;
+    background-color: mediumvioletred;
+    height: 50px;
+    color:black;
+}
+
+
+
+img{
+    width: 100% ;
+    height: fit-content;
+}
