@@ -1,0 +1,145 @@
+h1 {
+    color: orangered;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 50px;
+}
+
+
+h1,nav{
+    display: inline-block;
+}
+
+nav{
+    position: relative;
+    left: 5%;
+}
+.aumenta-botao {
+    display: inline-block;
+    font-size: 20px;
+    font-family: 'Titillium Web', sans-serif;
+    color: rgb(102, 0, 0);
+}
+
+button:hover {
+    background-color: orangered;
+    color: white;
+}
+
+main{
+    background-color: rgb(255, 207, 190);
+    margin: 0 auto;
+}    
+
+p {
+    font-family: 'Titillium Web', sans-serif;
+    color: rgb(102, 0, 0);
+}    
+.texto-home {
+    text-align: center;
+    margin: auto;
+    padding-top: 70px;
+    padding-bottom: 30px;
+    font-size: 25px;
+    padding-left: 30%;
+    padding-right: 30%;
+    font-family: 'Titillium Web', sans-serif;
+}    
+
+.section-tabela{
+    padding-top: 7%;
+    height: 500px;
+    font-family: 'Titillium Web', sans-serif;
+}    
+
+table {
+    text-align: center;
+    margin: auto;
+    border: 1px solid;
+    border-color: orangered;
+}    
+
+th {
+    color: orangered;
+    font-size: 22px;
+}    
+
+td {
+    color: rgb(102, 0, 0);
+    font-size: 22px;
+}    
+
+
+footer {
+    background-color:rgb(177, 22, 22) ;
+    color: white;
+    font-size: 22px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 0px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.texto-rodape {
+    color: white;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+#section-sobre-mim {
+    height: 500px;
+}
+#texto-sobre-mim{
+    text-align: center;
+    margin: auto;
+    padding-top: 70px;
+    padding-bottom: 30px;
+    font-size: 25px;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+
+.configura-textos{
+    text-align: center;
+    margin: auto;
+    padding-top: 70px;
+    padding-bottom: 30px;
+    font-size: 25px;
+    padding-left: 20%;
+    padding-right: 20%;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+
+
+#section-projetos{
+    height: 150px;
+    padding-bottom: 5%;
+}
+
+.section-img{
+    height: 800px;
+}
+
+.configura-img{
+    display: inline-block;
+    text-align: center;
+    width: 80%;
+    position: relative;
+    left: 10%;
+}
+
+#section-formulario{
+    height: 500px ;
+}
+
+label{
+    color: rgb(102, 0, 0);
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 25px;
+}
+#mensagem{
+    width: 200px;
+    height: 70px;
+}
