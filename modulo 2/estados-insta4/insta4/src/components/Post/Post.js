@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {IconeComContador} from '../IconeComContador/IconeComContador'
+import { IconeComContador } from '../IconeComContador/IconeComContador'
 
 import iconeCoracaoBranco from '../../img/favorite-white.svg'
 import iconeCoracaoPreto from '../../img/favorite.svg'
 import iconeComentario from '../../img/comment_icon.svg'
-import {SecaoComentario} from '../SecaoComentario/SecaoComentario'
+import { SecaoComentario } from '../SecaoComentario/SecaoComentario'
 
 import iconeMarcacaoBranco from '../../img/icone-marcacao-branco.png'
 import iconeMarcacaoPreto from '../../img/icone-marcacao-preto.png'
@@ -51,21 +51,22 @@ class Post extends React.Component {
     numeroComentarios: 0,
     marcado: false,
     numeroMarcacao: 0,
+    comentario: ""
   }
 
   onClickCurtida = () => {
-    if(this.state.numeroCurtidas >= 1) {
+    if (this.state.numeroCurtidas >= 1) {
       this.setState({
-      numeroCurtidas: this.state.numeroCurtidas - 1
+        numeroCurtidas: this.state.numeroCurtidas - 1
 
       })
-    }else {
+    } else {
       this.setState({
         numeroCurtidas: this.state.numeroCurtidas + 1,
         curtido: !this.state.curtido,
       })
     }
-    
+
     this.setState({
       curtido: !this.state.curtido,
     })
@@ -83,6 +84,7 @@ class Post extends React.Component {
       comentando: false,
       numeroComentarios: this.state.numeroComentarios + 1
     })
+  
   }
 
   onClickMarcado = () => {
@@ -96,32 +98,32 @@ class Post extends React.Component {
 
   render() {
     let iconeCurtida
-    
 
-    if(this.state.curtido) {
+
+    if (this.state.curtido) {
       iconeCurtida = iconeCoracaoPreto
-     
+
 
     } else {
       iconeCurtida = iconeCoracaoBranco
-      
+
     }
 
     let componenteComentario
 
-    if(this.state.comentando) {
-      componenteComentario = <SecaoComentario aoEnviar={this.aoEnviarComentario}/>
+    if (this.state.comentando) {
+      componenteComentario = <SecaoComentario aoEnviar={this.aoEnviarComentario} />
     }
 
     let iconeMarcacao
 
-    if(this.state.marcado) {
+    if (this.state.marcado) {
       iconeMarcacao = iconeMarcacaoPreto
-     
+
 
     } else {
       iconeMarcacao = iconeMarcacaoBranco
-      
+
     }
 
 
@@ -129,11 +131,11 @@ class Post extends React.Component {
 
     return <PostContainer>
       <PostHeader>
-        <UserPhoto src={this.props.fotoUsuario} alt={'Imagem do usuario'}/>
+        <UserPhoto src={this.props.fotoUsuario} alt={'Imagem do usuario'} />
         <p>{this.props.nomeUsuario}</p>
       </PostHeader>
 
-      <PostPhoto src={this.props.fotoPost} alt={'Imagem do post'}/>
+      <PostPhoto src={this.props.fotoPost} alt={'Imagem do post'} />
 
       <PostFooter>
         <IconeComContador
@@ -154,6 +156,7 @@ class Post extends React.Component {
         />
       </PostFooter>
       {componenteComentario}
+      <p>{this.state.comentario}</p>
     </PostContainer>
   }
 }
