@@ -43,6 +43,23 @@ class App extends React.Component{
     })
   }
 
+  handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      const novaMensagem = {
+        usuario: this.state.valorInputUsuario,
+        mensagem: this.state.valorInputMensagem
+      }
+  
+      const novasMensagens = [...this.state.mensagens, novaMensagem]
+      this.setState({mensagens: novasMensagens})
+      this.setState({
+        valorInputMensagem: [],
+        valorInputUsuario:[]
+      })
+    }
+  }
+
+
   onChangeInputUsuario = (event) => {
     this.setState({valorInputUsuario:event.target.value})
   }
@@ -53,17 +70,16 @@ class App extends React.Component{
 
   render() {
     
-    
-
+  
     const listaDeMensagens = this.state.mensagens.map((msg,indice) => {
       return (
         <SecaoMensagem key = {indice}
         usuario = {msg.usuario}
         mensagem ={msg.mensagem} />
       )
-    })
-
-
+    }) 
+  
+  
   return (
     <MainContainer>
       <MoveMsg>{listaDeMensagens}</MoveMsg>
@@ -77,8 +93,9 @@ class App extends React.Component{
         value={this.state.valorInputMensagem}
         onChange={this.onChangeInputMensagem}
         placeholder={"Mensagem"}
+        onKeyPress={this.handleKeyPress}
         />
-        <button onClick={this.adicionaMensagem}>Enviar</button>
+        <button onClick={this.adicionaMensagem} >Enviar</button>
       </InputSection>
 
     </MainContainer>

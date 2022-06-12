@@ -6,18 +6,38 @@ const SpanEstilizado = styled.span`
   color: orangered;
 
 `
+const BalaoDeMensagem = styled.div`
+background-color: ${props => {
+        if (props.tipo === "eu") {
+            return "#DDF7C8" 
+        } else if (props.tipo === "outro") {
+            return "#ffffff" 
+        }
+    }};
+`
 
 class SecaoMensagem extends React.Component {
-    
-    
-    render(){
-
-    
-        return(
-            <p><SpanEstilizado>{this.props.usuario}</SpanEstilizado> : {this.props.mensagem} </p>
-        )
+    deletarMensagem = () => {
+        console.log("cliclou duas vezes para deletar")
     }
-     
+
+    render() {
+        const nome = this.props.usuario
+        if (nome === "eu") {
+
+            return (
+
+                <BalaoDeMensagem tipo={"eu"} onDoubleClick={this.deletarMensagem}>
+                    <SpanEstilizado >{this.props.usuario}</SpanEstilizado> : {this.props.mensagem} </BalaoDeMensagem>
+            )
+        } else {
+            return (
+
+                <BalaoDeMensagem tipo={"outro"} onDoubleClick={this.deletarMensagem}>
+                    <SpanEstilizado >{this.props.usuario}</SpanEstilizado> : {this.props.mensagem} </BalaoDeMensagem>
+            )
+        }
+    }
 }
 
 export default SecaoMensagem;
