@@ -1,18 +1,38 @@
 import React from "react";
-import axios from "axios"
+import axios from "axios";
 import TelaListaUsuarios from "./componentes/TelaListaUsuarios";
 import TelaCadastroUsuario from "./componentes/TelaCadastroUsuario";
+import DetalheDoUsuario from "./componentes/DetalheDoUsuario";
 
 
+import styled from "styled-components";
+
+const Container = styled.div`
+display: flex;
+justify-content: center;
+`
+
+
+const ContainerTela = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 500px;
+  min-height: 500px;
+  border: 1px solid black;
+`
 
 export default class App extends React.Component {
   state = {
     listaDeUsuarios: [],
-    erro: "",
-    nomeDoUsuario: "",
-    emailDoUsuario: "",
+    dadosDoUsuario: [],
     tela: "cadastro"
-
+  }
+  componentDidMount() {
+    this.pegaUsuarios()
+  }
+  
+  componentDidUpdate() {
+    this.pegaUsuarios()
   }
 
   mudaTela = (telaEscolhida) => {
@@ -21,47 +41,20 @@ export default class App extends React.Component {
 
   exibeTela = () => {
     if (this.state.tela === "cadastro") {
-      return <TelaCadastroUsuario mudaTela={this.mudaTela}
-        nomeDoUsuario={this.state.nomeDoUsuario}
-        emailDoUsuario={this.state.emailDoUsuario}
-        novoNomeUsuario={this.novoNomeUsuario}
-        novoEmailUsuario={this.novoEmailUsuario}
-        criaUsuario={this.criaUsuario} />
+      return <TelaCadastroUsuario mudaTela={this.mudaTela} />
+    } else if (this.state.tela === "lista de usuarios") {
+      return <TelaListaUsuarios listaDeUsuarios={this.state.listaDeUsuarios}
+        mudaTela={this.mudaTela}
+        tela={this.state.tela}
+        handleOnClick={this.handleOnClick}
+        deletaUsuario={this.deletaUsuario}
+        pegaUsuarios={this.pegaUsuarios} />
     } else {
-      return <TelaListaUsuarios mudaTela={this.mudaTela}
-        listaDeUsuarios={this.state.listaDeUsuarios}
-        pegaUsuarios={this.pegaUsuarios}
+      return <DetalheDoUsuario mudaTela={this.mudaTela}
+        dadosDoUsuario={this.state.dadosDoUsuario}
         deletaUsuario={this.deletaUsuario}
       />
     }
-  }
-
-  criaUsuario = () => {
-    const novoUsuario = {
-      name: this.state.nomeDoUsuario,
-      email: this.state.emailDoUsuario
-    }
-    axios.post("https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users",
-      novoUsuario,
-      {
-        headers: {
-          Authorization: "ilena-acioli-alves"
-        }
-      }
-    ).then((resposta) => {
-      // console.log(resposta)
-      alert("Usuário cadastrado!");
-    }).catch((erro) => {
-      alert(erro.response.data.message)
-    })
-  }
-
-  novoNomeUsuario = (event) => {
-    this.setState({ nomeDoUsuario: event.target.value })
-  }
-
-  novoEmailUsuario = (event) => {
-    this.setState({ emailDoUsuario: event.target.value })
   }
 
   pegaUsuarios = () => {
@@ -74,39 +67,67 @@ export default class App extends React.Component {
       }
     )
       .then((resposta) => {
-        console.log(resposta.data)
         this.setState({ listaDeUsuarios: resposta.data })
       })
       .catch((erro) => {
-        console.log(erro.response.data)
         this.setState({ erro: erro.response.data })
       })
   }
 
-  deletaUsuario = (id) =>{
+  deletaUsuario = (id) => {
 
-  axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`,
-    {
+    axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`,
+      {
         headers: {
           Authorization: "ilena-acioli-alves"
         }
       }
-    ).then((resposta)=>{
+    ).then((resposta) => {
 
-        alert("Usuário removido")
-        this.pegaUsuarios()
-    }).catch((erro)=>{
-      console.log(erro.response.data)
-        alert(erro.response.data)
+      alert("Tem certeza de que deseja deletar?")
+      this.pegaUsuarios()
+    }).catch((erro) => {
+      alert(erro.response.data)
     })
   }
 
+
+
+  pegaDadosUsuario = (id) => {
+    axios.get(
+      `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`,
+      {
+        headers: {
+          Authorization: "ilena-acioli-alves"
+        }
+      }
+    ).then((resposta) => {
+      // console.log(resposta.data)
+      this.setState({ dadosDoUsuario: resposta.data })
+    })
+      .catch((erro) => {
+        alert(erro.response.data)
+      })
+
+  }
+
+
+
+
+  handleOnClick = (id) => {
+    this.pegaDadosUsuario(id)
+    this.mudaTela("tela de detalhes")
+  }
+  
+
   render() {
- 
+
     return (
-      <div>
-        {this.exibeTela()}
-      </div>
+      <Container>
+        <ContainerTela>
+          {this.exibeTela()}
+        </ContainerTela>
+      </Container>
     )
   }
 }
