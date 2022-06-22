@@ -30,10 +30,7 @@ export default class App extends React.Component {
   componentDidMount() {
     this.pegaUsuarios()
   }
-  
-  componentDidUpdate() {
-    this.pegaUsuarios()
-  }
+
 
   mudaTela = (telaEscolhida) => {
     this.setState({ tela: telaEscolhida })

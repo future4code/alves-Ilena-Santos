@@ -15,24 +15,13 @@ const CardUsuario = styled.div`
 
 
 export default class TelaListaUsuarios extends React.Component {
-  state = {
-    listaDeUsuarios: this.props.listaDeUsuarios,
-    erro: "",
-  }
-  
+
   componentDidMount() {
     this.props.pegaUsuarios()
   }
-  componentDidUpdate() {
-    this.props.pegaUsuarios()
-  }
-  
-  
-
-
 
   render() {
-    const listaDeUsuarios = this.state.listaDeUsuarios.map((usuario) => {
+    const listaDeUsuarios = this.props.listaDeUsuarios.map((usuario) => {
 
       return (
         <CardUsuario key={usuario.id}>
@@ -42,7 +31,6 @@ export default class TelaListaUsuarios extends React.Component {
         </CardUsuario>
       )
     })
-
 
     return (
       <div>
