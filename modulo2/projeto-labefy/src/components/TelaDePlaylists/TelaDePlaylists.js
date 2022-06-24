@@ -1,11 +1,25 @@
 import React from 'react'
 import axios from 'axios'
+import styled from "styled-components";
+
+const ContainerTelaPlaylist = styled.div`
+    display: grid;
+    grid-template-columns: 600px;
+    grid-template-rows: 1fr;
+    justify-content: center;
+   
+`
+
+const BotaoCriarPlaylist = styled.button`
+    width: 50px;
+`
 
 export default class TelaDePlaylists extends React.Component {
     state = {
         nomeDaPlaylist: "",
         erro: ""
     }
+
     componentDidMount() {
         this.props.pegaPlaylists()
     }
@@ -24,6 +38,7 @@ export default class TelaDePlaylists extends React.Component {
         ).then((resposta) => {
             alert("Playlist criada!")
             this.setState({ nomeDaPlaylist: "" })
+            this.props.pegaPlaylists()
         }).catch((erro) => {
             alert(erro.response.data.message)
         })
@@ -40,7 +55,7 @@ export default class TelaDePlaylists extends React.Component {
             alert("Tem certeza que deseja deletar?")
             this.props.pegaPlaylists()
           }).catch((erro)=>{
-            console.log(erro)
+            alert(erro.response.data)
           })
     }
 
@@ -60,17 +75,17 @@ export default class TelaDePlaylists extends React.Component {
 
         return (
 
-            <div>
+            <ContainerTelaPlaylist>
                 <p>Crie sua playlist:</p>
                 <input placeholder='Nome da playlist'
                     value={this.state.nomeDaPlaylist}
                     onChange={this.novaPlaylist}
                 />
-                <button onClick={this.criaPlaylist}>Criar</button>
+                <BotaoCriarPlaylist onClick={this.criaPlaylist}>Criar</BotaoCriarPlaylist>
                 <hr />
                 {listaDePlaylists}
 
-            </div>
+            </ContainerTelaPlaylist>
         )
     }
 }

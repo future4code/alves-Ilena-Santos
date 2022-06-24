@@ -2,6 +2,9 @@ import React from "react";
 import TelaDePlaylists from "./components/TelaDePlaylists/TelaDePlaylists";
 import TelaDeMusica from "./components/TelaDeMusica/TelaDeMusica";
 import axios from "axios"
+import styled from "styled-components";
+
+
 
 
 
@@ -10,6 +13,7 @@ export default class App extends React.Component {
   state = {
     listaDePlaylists: [],
     musicasDaPlaylist: [],
+    idDaPlaylist: [],
     tela: "tela inicial"
   }
 
@@ -30,7 +34,9 @@ export default class App extends React.Component {
         handleOnclick={this.handleOnclick}/>
       case "musicas":
         return <TelaDeMusica mudaTela={this.mudaTela}
-        musicasDaPlaylist={this.state.musicasDaPlaylist}/>
+        musicasDaPlaylist={this.state.musicasDaPlaylist}
+        pegaMusicasDaPlaylist={this.pegaMusicasDaPlaylist}
+        idDaPlaylist={this.state.idDaPlaylist}/>
       default:
         return <div>
           <h1>Bem vindo ao Labefy, sua plataforma de streaming!</h1>
@@ -67,6 +73,7 @@ axios.get(url,
   }
   ).then((resposta)=>{
     this.setState({musicasDaPlaylist: resposta.data.result.tracks})
+    this.setState({idDaPlaylist: id})
   }).catch((erro)=>{
     console.log(erro.response.data)
   })
