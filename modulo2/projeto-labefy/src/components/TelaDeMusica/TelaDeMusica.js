@@ -5,17 +5,27 @@ import styled from "styled-components";
 const ContainerTelaMusica = styled.div`
     display: grid;
     grid-template-columns: 600px;
-    grid-template-rows: 0.3fr 0.5fr 0.5fr 1fr 1fr ;
+    grid-template-rows: 0.3fr 0.5fr 0.5fr 0.5fr 1fr ;
     justify-content: center;
-   
+    color: orangered;
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    font-family:'Roboto', sans-serif;
+    background-color: black;
+    min-height: 100vh;
+    width: 100vw;
+`
+const Botoes = styled.button`
+    width: 100px;
+height: 40px;
+border-radius: 10px;
 `
 
 
 const ContainerMusica = styled.div`
     display: grid;
-    grid-template-columns: 200px;
-    grid-template-rows: 0.5fr 0.5fr 0.5fr;
-    border: 1px solid black;
+    grid-template-columns: 250px;
+    grid-template-rows: 0.5fr 0.5fr 0.5fr 0.5fr;
+    border: 1px solid orangered;
 
 `
 
@@ -60,20 +70,20 @@ export default class TelaDeMusica extends React.Component {
 
     }
 
-    deletaMusica = (idDaPlaylist,idDaMusica) => {
+    deletaMusica = (idDaPlaylist, idDaMusica) => {
         const url = `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${idDaPlaylist}/tracks/${idDaMusica}`
         axios.delete(url,
             {
                 headers: {
-                  Authorization: "ilena-acioli-alves"
+                    Authorization: "ilena-acioli-alves"
                 }
-              }).then((resposta)=>{
+            }).then((resposta) => {
                 alert("Tem certeza que deseja deletar?")
-            this.props.pegaMusicasDaPlaylist(idDaPlaylist)
-              }).catch((erro)=>{
+                this.props.pegaMusicasDaPlaylist(idDaPlaylist)
+            }).catch((erro) => {
                 alert(erro.response.data)
-              })
-            
+            })
+
     }
 
     render() {
@@ -81,10 +91,9 @@ export default class TelaDeMusica extends React.Component {
             return <ContainerMusica key={musica.id}>
                 <p>Nome da música: {musica.name}</p>
                 <p>Artista: {musica.artist}</p>
-                <p>link: {musica.url}</p>
-                <button onClick={()=>this.deletaMusica(this.props.idDaPlaylist, musica.id)}>Deletar música</button>
+                <Botoes onClick={() => this.deletaMusica(this.props.idDaPlaylist, musica.id)}>Deletar música</Botoes>
                 <audio ref="audio_tag" src={musica.url} controls />
-                
+
 
             </ContainerMusica>
         })
@@ -92,7 +101,7 @@ export default class TelaDeMusica extends React.Component {
 
         return (
             <ContainerTelaMusica>
-                <button onClick={() => this.props.mudaTela("playlists")}>Voltar para Playlists</button>
+                <Botoes onClick={() => this.props.mudaTela("playlists")}>Voltar para Playlists</Botoes>
                 <p>Quantidade de músicas: {this.props.musicasDaPlaylist.length}</p>
                 <div>
                     <p>Adicionar músicas:</p>
@@ -108,7 +117,7 @@ export default class TelaDeMusica extends React.Component {
                         value={this.state.urlDaMusica}
                         onChange={this.novaUrl}
                     />
-                    <button onClick={()=>this.adicionaMusicas(this.props.idDaPlaylist)}>Adicionar Música</button>
+                    <Botoes onClick={() => this.adicionaMusicas(this.props.idDaPlaylist)}>Adicionar Música</Botoes>
                 </div>
 
                 <p>Lista de Músicas: </p>

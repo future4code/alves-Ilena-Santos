@@ -9,6 +9,30 @@ import styled from "styled-components";
 
 
 
+const ContainerHome = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+font-family:'Roboto', sans-serif;
+color: orangered;
+background-color: black;
+height: 100vh;
+width: 100vw;
+
+
+`
+const BotaoVerPlaylist = styled.button`
+width: 100px;
+height: 40px;
+border-radius: 10px;
+`
+
+
+
+
+
+
 export default class App extends React.Component {
   state = {
     listaDePlaylists: [],
@@ -38,11 +62,11 @@ export default class App extends React.Component {
         pegaMusicasDaPlaylist={this.pegaMusicasDaPlaylist}
         idDaPlaylist={this.state.idDaPlaylist}/>
       default:
-        return <div>
+        return <ContainerHome>
           <h1>Bem vindo ao Labefy, sua plataforma de streaming!</h1>
           <h3>Confira suas playlists:</h3>
-          <button onClick={() => this.mudaTela("playlists")}>Ver playlists</button>
-        </div>
+          <BotaoVerPlaylist onClick={() => this.mudaTela("playlists")}>Ver playlists</BotaoVerPlaylist>
+        </ContainerHome>
     }
   }
 
