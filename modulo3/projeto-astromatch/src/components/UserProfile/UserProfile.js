@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { Button } from '@chakra-ui/react'
-import { ContainerProfile, Img, ContainerLike, ContainerProfiles, ButtonLike, ButtonDislike } from './UserProfile-styled';
+import { ContainerProfile, Img, ContainerLike, ContainerProfiles, ButtonLike, ButtonDislike, TextFont } from './UserProfile-styled';
 import Like from "../../img/like.png"
 import Dislike from "../../img/dislike.png"
+import Refresh from "../../img/refresh.png"
 
 
 export default function UserProfile(props) {
     const [profile, setProfile] = useState({})
+    const [like, setLike] = useState(false)
 
 
     const getProfile = () => {
@@ -38,6 +40,7 @@ export default function UserProfile(props) {
             }).catch((error) => {
                 console.log(error)
             })
+        setLike(true)
     }
 
     const clearMatches = () => {
@@ -59,25 +62,26 @@ export default function UserProfile(props) {
 
     return (
         <div>
-            <h3> Perfis</h3>
             {profile ? (
                 <ContainerProfiles>
-                    <ContainerProfile>
-                        <Img src={profile.photo} alt={profile.photo_alt} />
-                        <p>{profile.name}, {profile.age}</p>
-                        <p>{profile.bio}</p>
+                    <ContainerProfile  >
+                        <Img src={profile.photo} alt={profile.photo_alt} like={like} />
+                        <strong>
+                            <TextFont>{profile.name}, {profile.age}</TextFont>
+                        </strong>
+                        <TextFont>{profile.bio}</TextFont>
                     </ContainerProfile>
                     <ContainerLike>
                         <ButtonLike onClick={() => { chooseProfile(profile.id) }}>
                             <img src={Like} alt="desenho mão com polegar para cima" height={40} width={40} />
                         </ButtonLike>
                         <ButtonDislike onClick={getProfile}>
-                            <img src={Dislike} alt="desenho mão com polegar para cima" height={35} width={35} />
+                            <img src={Dislike} alt="desenho mão com polegar para baixo" height={35} width={35} />
                         </ButtonDislike>
                     </ContainerLike>
                 </ContainerProfiles>)
                 :
-                (<Button onClick={handleOnclick}> Resetar Perfis</Button>)}
+                (<Button leftIcon={<img src={Refresh} alt="desenho de setas em círculo" height={20} width={20} />} onClick={handleOnclick}>  Resetar Perfis</Button>)}
         </div>
     )
 }

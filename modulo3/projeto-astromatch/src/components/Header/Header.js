@@ -1,7 +1,8 @@
 import React from 'react'
-import { ContainerHeader, ButtonMatches } from "./Header-styled"
-import Fire from "../../img/fire.png"
+import { ContainerHeader, ButtonMatches, ButtonProfile } from "./Header-styled"
 import { Text, Button } from '@chakra-ui/react'
+import Fire from "../../img/fire.png"
+import Profile from "../../img/profile.png"
 
 
 export default function Header(props) {
@@ -9,7 +10,9 @@ export default function Header(props) {
     const changeButton = () => {
         switch (props.screen) {
             case "matches":
-                return <Button onClick={() => { props.changeScreen("profiles") }}> Ir para Perfis </Button>
+                return <ButtonProfile onClick={() => { props.changeScreen("profiles") }}>
+                    <img src={Profile} alt="desenho de boneco de perfil" height={40} width={40} />
+                </ButtonProfile>
             case "profiles":
                 return <ButtonMatches onClick={() => { props.changeScreen("matches") }}>
                     <img src={Fire} alt="desenho de chama" height={40} width={40} />
