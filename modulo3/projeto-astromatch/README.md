@@ -14,7 +14,7 @@ O projeto apresenta duas telas. A tela inicial contendo botões de like e dislik
 
 O usuário acessará o link de surge informado na descrição deste projeto e com ele terá acesso a plataforma do projeto sem a necessidade de rodar o projeto em sua máquina.
 
-link do surge: 
+link do surge: https://ilena-astromatch.surge.sh/
 
 ### Linguagens utilizadas no código
 
