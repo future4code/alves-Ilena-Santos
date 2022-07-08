@@ -23,9 +23,14 @@ export const TextFont = styled.p`
 `
 export const ContainerMatches = styled.div`
   overflow-y: scroll;
-  max-height: 300px;
+  max-height: 250px;
 `
 
 export const ContainerButtonClear = styled.div`
-padding-top: 35px;
+padding-top: 20px;
+padding-bottom: 20px;
+`
+export const Img = styled.div`
+  display: flex;
+  justify-content: center;
 `

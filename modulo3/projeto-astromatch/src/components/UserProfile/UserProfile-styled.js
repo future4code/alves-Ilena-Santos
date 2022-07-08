@@ -24,8 +24,11 @@ export const Img = styled.img`
   margin-top: 0.5rem;
   margin-bottom: 8px;
   transition: all 0.5s ease;
-  ${(props) => props.like && "transform:   translate(15rem, 5rem) rotate(15deg)"};
-  ${(props) => props.like && "opacity: 0"};
+  ${(props) => props.status === "like" && "transform:   translate(15rem, 5rem) rotate(15deg)"};
+  ${(props) => props.status ==="like" && "opacity: 0"};
+  ${(props) => props.status==="normal" && ""}
+  ${(props) => props.status==="dislike" && "transform:   translate(-15rem, 5rem) rotate(-15deg)"};
+  ${(props) => props.status ==="dislike" && "opacity: 0"};
 `
 
 export const TextFont = styled.p`

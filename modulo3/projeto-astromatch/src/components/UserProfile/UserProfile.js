@@ -5,22 +5,29 @@ import { ContainerProfile, Img, ContainerLike, ContainerProfiles, ButtonLike, Bu
 import Like from "../../img/like.png"
 import Dislike from "../../img/dislike.png"
 import Refresh from "../../img/refresh.png"
+import { toast } from 'react-toastify'
 
 
 export default function UserProfile(props) {
     const [profile, setProfile] = useState({})
-    const [like, setLike] = useState(false)
+    const [status, setStatus] = useState("normal")
+    
+
 
 
     const getProfile = () => {
         axios.get('https://us-central1-missao-newton.cloudfunctions.net/astroMatch/ilena/person')
             .then((response) => {
-
                 setProfile(response.data.profile)
+                changeAnimation("normal")
             })
             .catch((error) => {
                 console.log(error)
             })
+    }
+
+    const changeAnimation =( status)=>{
+        setStatus(status)
     }
 
     useEffect(() => {
@@ -34,13 +41,13 @@ export default function UserProfile(props) {
                 "choice": true
             }).then((response) => {
                 if (response.data.isMatch) {
-                    alert("Deu match!")
+                    toast.success(`Você e ${profile.name} são um match!` )
                 }
                 getProfile()
+                changeAnimation("like")
             }).catch((error) => {
                 console.log(error)
             })
-        setLike(true)
     }
 
     const clearMatches = () => {
@@ -53,9 +60,14 @@ export default function UserProfile(props) {
 
     }
 
-    const handleOnclick = () => {
+    const handleOnclickDislike = ()=> {
+        changeAnimation("dislike")
+        getProfile()
+    }
+
+    const handleOnclickReset = () => {
         clearMatches()
-        alert("Perfis resetados!")
+        toast.success("Perfis resetados!" )
         getProfile()
     }
 
@@ -65,23 +77,23 @@ export default function UserProfile(props) {
             {profile ? (
                 <ContainerProfiles>
                     <ContainerProfile  >
-                        <Img src={profile.photo} alt={profile.photo_alt} like={like} />
+                        <Img src={profile.photo} alt={profile.photo_alt} status={status}/>
                         <strong>
                             <TextFont>{profile.name}, {profile.age}</TextFont>
                         </strong>
                         <TextFont>{profile.bio}</TextFont>
                     </ContainerProfile>
                     <ContainerLike>
+                        <ButtonDislike onClick={handleOnclickDislike}>
+                            <img src={Dislike} alt="desenho mão com polegar para baixo" height={35} width={35} />
+                        </ButtonDislike>
                         <ButtonLike onClick={() => { chooseProfile(profile.id) }}>
                             <img src={Like} alt="desenho mão com polegar para cima" height={40} width={40} />
                         </ButtonLike>
-                        <ButtonDislike onClick={getProfile}>
-                            <img src={Dislike} alt="desenho mão com polegar para baixo" height={35} width={35} />
-                        </ButtonDislike>
                     </ContainerLike>
                 </ContainerProfiles>)
                 :
-                (<Button leftIcon={<img src={Refresh} alt="desenho de setas em círculo" height={20} width={20} />} onClick={handleOnclick}>  Resetar Perfis</Button>)}
+                (<Button leftIcon={<img src={Refresh} alt="desenho de setas em círculo" height={20} width={20} />} onClick={handleOnclickReset}>  Resetar Perfis</Button>)}
         </div>
     )
 }

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { CardMatch, ContainerMatches, ImgMatches, TextFont, ContainerButtonClear } from './Matches-styles';
+import { CardMatch, ContainerMatches, ImgMatches, TextFont, ContainerButtonClear, Img } from './Matches-styles';
 import { Button } from '@chakra-ui/react'
 import TrashCan from "../../img/trash-can.png"
+import Linkedin from "../../img/linkedin.png"
 
 export default function Matches() {
     const [matches, setMatches] = useState([])
@@ -52,6 +53,14 @@ export default function Matches() {
             <ContainerButtonClear>
                 <Button leftIcon={<img src={TrashCan} alt="desenho de uma lata de lixo" height={20} width={20} />} onClick={clearMatches}>Limpar swipes e matches</Button>
             </ContainerButtonClear>
+            <TextFont>
+                Desenvolvido por Ilena Acioli
+            </TextFont>
+            <Img>
+            
+            <a target={'_blank'} href="https://www.linkedin.com/in/ilenaacioli/"><img src={Linkedin} height='22px' width='22px' class="media-object  img-responsive img-thumbnail" /></a>
+            </Img>
+            
         </div>
     )
 }

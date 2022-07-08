@@ -1,6 +1,6 @@
 import React from 'react'
 import { ContainerHeader, ButtonMatches, ButtonProfile } from "./Header-styled"
-import { Text, Button } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
 import Fire from "../../img/fire.png"
 import Profile from "../../img/profile.png"
 
