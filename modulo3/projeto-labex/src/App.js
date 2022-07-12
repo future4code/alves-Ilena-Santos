@@ -1,6 +1,5 @@
-import ListTripsPage from "./pages/ListTripsPage/ListTripsPage"
-import Header from "./components/Header/Header"
 import {ContainerApp} from "./App-styled"
+import { Router } from "./routes/Router";
 import Footer from "./components/Footer/Footer"
 
 
@@ -8,8 +7,7 @@ import Footer from "./components/Footer/Footer"
 function App() {
   return (
     <ContainerApp >
-      <Header/>
-      <ListTripsPage />
+      <Router/>
       <Footer/>
     </ContainerApp>
   );

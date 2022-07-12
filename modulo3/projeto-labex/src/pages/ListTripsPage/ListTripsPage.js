@@ -1,22 +1,42 @@
 import React from 'react'
-import {useGetData } from "../../hooks/useGetData"
-import { ContainerListTripsPage } from './ListTripsPage-styled';
+import { useGetData } from "../../hooks/useGetData"
+import { ContainerListTripsPage, CardTrips, ContainerTrips, SectionPage, ContainerButton } from './ListTripsPage-styled';
+import { useNavigate } from "react-router-dom"
+import { goBack, goToApplicationFormPage } from "../../routes/coordinator"
+
 
 
 export default function ListTripsPage() {
-    const { data, loading, erro } = useGetData("/trips");
+  const navigate = useNavigate()
+  const { data, loading, erro } = useGetData("/trips");
   const trips = data?.trips;
 
-//   console.log(trips)
-  const listOfTrips = trips?.map((trip,index)=>{
-    return (<p key={index}>{trip.name}</p>)
+ console.log(trips)
+  const listOfTrips = trips?.map((trip, index) => {
+    return (<CardTrips key={trip.id}>
+      <p> Viagem: {trip.name}</p>
+      <p>Planeta: {trip.planet}</p>
+      <p> Data: {trip.date} </p>
+      <p> Descrição: {trip.description} </p>
+      <p> Duração: {trip.durationInDays} dias</p>
+    </CardTrips>
+
+    )
   })
 
   return (
-    
+
     <ContainerListTripsPage>
-        <div>ListTripsPage</div>
-        <div>{listOfTrips}</div>
+      <SectionPage>
+        <h1>ListTripsPage</h1>
+        <ContainerTrips>
+          {listOfTrips}
+        </ContainerTrips>
+        <ContainerButton>
+          <button onClick={() => { goBack(navigate) }}>Voltar</button>
+          <button onClick={() => { goToApplicationFormPage(navigate) }}>Bora pro espaço?</button>
+        </ContainerButton>
+      </SectionPage>
     </ContainerListTripsPage>
 
   )
