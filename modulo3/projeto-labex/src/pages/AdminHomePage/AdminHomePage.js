@@ -1,22 +1,29 @@
 import React from 'react'
-import { useGetData } from "../../hooks/useGetData"
+import { useGetTrips } from "../../hooks/useGetTrips"
 import { useNavigate } from "react-router-dom"
 import { goBack, goToTripDetailsPage, goToHomePage } from "../../routes/coordinator"
 import { ContainerButton, ContainerTrips, SectionPage, CardTrips, ContainerAdminHomePage, ContainerTitle, ContainerCreateTrip, ContainerElements } from './AdminHomePage-styled'
 import Title from '../../components/Title/Title'
+import { useProtectedPage } from '../../hooks/useProtectedPage'
+import CreateTripForm from '../../components/CreateTripForm/CreateTripForm'
 
 
 
 export default function AdminHomePage() {
+  useProtectedPage()
   const navigate = useNavigate()
-  const { data, loading, erro } = useGetData("/trips");
+  const { data, loading, erro } = useGetTrips("/trips");
   const trips = data?.trips;
 
+  const handleOnClick = (id) => {
+    localStorage.setItem('id', id)
+    goToTripDetailsPage(navigate,id)
+  }
 
-  const listOfTrips = trips?.map((trip, index) => {
-    return (<CardTrips>
-      <p key={index}>{trip.name}</p>
-      <button onClick={() => { goToTripDetailsPage(navigate) }}>Ver detalhes</button>
+  const listOfTrips = trips?.map((trip) => {
+    return (<CardTrips key={trip.id}>
+      <p >{trip.name}</p>
+      <button onClick={() => { handleOnClick(trip.id) }}>Ver detalhes</button>
       <button>Deletar</button>
     </CardTrips>
 
@@ -35,11 +42,10 @@ export default function AdminHomePage() {
           {listOfTrips}
         </ContainerTrips>
         <ContainerCreateTrip>
-          <h3>Criar viagem</h3>
-          <input />
+         <CreateTripForm/>
           <ContainerButton>
           <button onClick={() => { goBack(navigate) }}>Voltar</button>
-          <button>Criar</button>
+
           </ContainerButton>
         </ContainerCreateTrip>
       </ContainerElements>

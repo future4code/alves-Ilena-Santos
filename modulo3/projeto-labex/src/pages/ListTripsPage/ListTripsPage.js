@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGetData } from "../../hooks/useGetData"
+import { useGetTrips } from "../../hooks/useGetTrips"
 import { ContainerListTripsPage, CardTrips, ContainerTrips, SectionPage, ContainerButton } from './ListTripsPage-styled';
 import { useNavigate } from "react-router-dom"
 import { goBack, goToApplicationFormPage } from "../../routes/coordinator"
@@ -8,7 +8,7 @@ import { goBack, goToApplicationFormPage } from "../../routes/coordinator"
 
 export default function ListTripsPage() {
   const navigate = useNavigate()
-  const { data, loading, erro } = useGetData("/trips");
+  const { data, loading, erro } = useGetTrips("/trips");
   const trips = data?.trips;
 
  console.log(trips)
