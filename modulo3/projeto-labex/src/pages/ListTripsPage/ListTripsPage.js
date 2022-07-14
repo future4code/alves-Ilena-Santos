@@ -11,7 +11,6 @@ export default function ListTripsPage() {
   const { data, loading, erro } = useGetTrips("/trips");
   const trips = data?.trips;
 
- console.log(trips)
   const listOfTrips = trips?.map((trip, index) => {
     return (<CardTrips key={trip.id}>
       <p> Viagem: {trip.name}</p>

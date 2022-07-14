@@ -1,29 +1,48 @@
 import React from 'react'
-import { useState } from 'react'
+import useForm from '../../hooks/useForm'
+import axios from "axios";
+import { BASE_URL } from "../../constants/BASE_URL";
 
-export default function CreateTripForm() {
-    const [name, setName] = useState("")
-    const [planet, setPlanet] = useState("")
-    const [date, setDate] = useState("")
-    const [description, setDescription] = useState("")
-    const [durationInDays, setDurationInDays] = useState(0)
 
-    const teste =()=>{
-        console.log(name,planet)
-    }
+export default function CreateTripForm(props) {
+    
+    const { form, onChange, cleanFields } = useForm({ name: "", planet: "", date:"", description:"", durationInDays:""});
 
-    const onChangeName = (event) => {
-        setName(event.target.value)
-    }
 
-    const onChangePlanet = (event) => {
-        setPlanet(event.target.value)
-    }
+    const onSubmitCreate = (event) => {
+        event.preventDefault();
+     
+        const token = localStorage.getItem("token")
+        axios
+          .post(`${BASE_URL}/trips`, form,
+          {headers: {
+            auth: token
+        }})
+          .then((res) => {
+           alert("Criou viagem")
+           props.handleCreatePage()
+
+
+          })
+          .catch((err) => {
+            alert("Erro na requisição")
+          });
+    
+          cleanFields()
+      }
+
+      
   return (
   <div>
       <div>CreateTripForm</div>
-      <input placeholder='nome'value={name} onChange={onChangeName}/>
-      <select onChange={onChangePlanet}>
+      <form onSubmit={onSubmitCreate}>
+      <input placeholder='Nome'
+      name='name'
+      value={form.name} 
+      onChange={onChange}
+      required
+      />
+      <select onChange={onChange} placeholder="Planeta" name='planet' value={form.planet} required >
         <option value={"mercury"}>Mercúrio</option>
         <option value={"venus"}>Vênus</option>
         <option value={"earth"}>Terra</option>
@@ -34,7 +53,28 @@ export default function CreateTripForm() {
         <option value={"neptune"}>Natuno</option>
         <option value={"pluto"}>Plutão</option>
       </select>
-      <button onClick={teste}>Teste</button>
+       <input placeholder='Descrição'
+       onChange={onChange}
+       name='description'
+       value={form.description}
+       required
+       />
+      <input placeholder='Data'
+      onChange={onChange}
+       type='date' 
+       name='date'
+       value={form.date}
+    />
+       <input
+       placeholder='Duração em dias'
+       onChange={onChange}
+       type="number"
+       name='durationInDays'
+       value={form.durationInDays}
+       required
+       />
+      <button > Criar </button>
+      </form>
   </div>
   )
 }

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { BASE_URL } from "../constants/BASE_URL";
 
 
-export function useGetTrips(path) {
+export function useGetTrips(path,refresh) {
     const [data, setData] = useState();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
@@ -20,6 +20,6 @@ export function useGetTrips(path) {
           setLoading(false);
           setError(err.response.data);
         });
-    }, [path]);
+    }, [path,refresh]);
     return { data, loading, error };
   }

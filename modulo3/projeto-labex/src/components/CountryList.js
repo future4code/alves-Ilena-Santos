@@ -1,75 +1,8 @@
-import React, { useState } from 'react'
-import useForm from '../../hooks/useForm'
-import axios from "axios";
-import { BASE_URL } from "../../constants/BASE_URL";
-import { useGetTrips } from "../../hooks/useGetTrips"
-import CountryList from '../../components/CountryList';
+import React from 'react'
 
-export default function ApplicationFormPage() {
-  const { form, onChange, cleanFields } = useForm({ name: "", age: "", applicationText:"", profession:"", country:""});
-  const { data, loading, erro } = useGetTrips("/trips");
-  const [id, setId] = useState("")
-  
-  const trips = data?.trips;
-
-  const onChangeId = (event) =>{
-    setId(event.target.value)
-  }
-
-  
-
-  const onSubmitApply = (event) => {
-    event.preventDefault();
-  console.log(form)
-    // axios
-    //   .post(`${BASE_URL}/trips/${id}/apply`, form,
-    //  )
-    //   .then((res) => {
-    //    alert("Aplicação feita")
-    //   })
-    //   .catch((err) => {
-    //     alert("Erro na requisição")
-    //   });
-
-    //   cleanFields()
-  }
-
-const tripOptions = trips?.map((trip,index)=>{
-  return <option key={index} value={trip.id}> {trip.name}</option>
-})
-
-
-  return (
-    <div>
-<form onSubmit={onSubmitApply}>
-      <select onChange={onChangeId} placeholder="Escolha uma viagem"  required >
-       {tripOptions}
-      </select>
-      <input placeholder='Nome'
-      name='name'
-      value={form.name} 
-      onChange={onChange}
-      required
-      />
-       <input placeholder='Idade'
-       onChange={onChange}
-       name='age'
-       value={form.age}
-       required
-       />
-       <input placeholder='Texto de candidatura'
-       onChange={onChange}
-       name='applicationText'
-       value={form.applicationText}
-       required
-       />
-       <input placeholder='Profissão'
-       onChange={onChange}
-       name='profession'
-       value={form.profession}
-       required
-       />
-      <select onChange={onChange} name="country" placeholder='País' required>
+export default function CountryList(props) {
+    return (
+        <select onChange={props.onChange} name="country" placeholder='País' required>
             <option value="Brasil" >Brasil</option>
             <option value="Afeganistão">Afeganistão</option>
             <option value="África do Sul">África do Sul</option>
@@ -321,11 +254,5 @@ const tripOptions = trips?.map((trip,index)=>{
             <option value="Zimbabwe">Zimbabwe</option>
             <option value="Zâmbia">Zâmbia</option>
         </select>
-        
-      
-      <button>Teste</button>
-       </form>
-    </div>
-
-  )
+    )
 }
