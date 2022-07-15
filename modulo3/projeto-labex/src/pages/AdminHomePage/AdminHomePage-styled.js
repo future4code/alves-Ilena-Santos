@@ -42,9 +42,8 @@ export const SectionPage = styled.div`
 
 export const ContainerTitle = styled.div`
     display: flex;
+    justify-content: center;
     width: 100%;
-    border: 3px green solid;
-
 `
 
 export const ContainerElements = styled.div`
@@ -58,7 +57,6 @@ export const ContainerElements = styled.div`
 `
 export const ContainerTrips = styled.div`
     width: 300px;
-    border: 2px solid red; 
     overflow-y: scroll;
     max-height: 145px;
     padding-left: 25px;
@@ -67,9 +65,9 @@ export const ContainerCreateTrip = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 200px;
+    text-align: center;
+    width: 100px;
     flex-direction: column;
-    border: 3px red solid;
     padding-right: 100px;
 
 `
@@ -80,8 +78,13 @@ export const ContainerButton = styled.div`
     justify-content: space-around;
     width: 150px;
     height: 60px;
-    /* padding-top: 100px; */
 
 `
 
-
+export const ButtonDelete = styled.button`
+  border: none;
+  background-color: transparent;
+  :hover {
+  -webkit-transform: scale(1.3);
+  transform: scale(1.3);}
+`

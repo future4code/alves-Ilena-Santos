@@ -19,7 +19,7 @@ export const CardTrips = styled.div`
     grid-template-rows: 1fr 20px 20px 1fr 20px;
     text-align: center;
     width: 190px;
-    height: 260px;
+    height: 300px;
     border-radius: 8px;
     margin: 20px;
     padding: 10px;
@@ -36,11 +36,9 @@ display: flex;
 flex-direction: row;
 flex-wrap: wrap;
 justify-content: space-around;
-
-    width: 100%;
-    border: 2px solid red; 
-    overflow-y: scroll;
-    max-height: 290px;
+width: 100%;
+overflow-y: scroll;
+max-height: 290px;
 `
 
 export const SectionPage = styled.div`
@@ -51,7 +49,6 @@ export const SectionPage = styled.div`
     justify-content: center;
     justify-items: center;
     color: white;
-    border: 1px green solid;
 `
 export const ContainerButton = styled.div`
     display: flex;
@@ -59,6 +56,5 @@ export const ContainerButton = styled.div`
     justify-content: space-around;
     width: 150px;
     height: 60px;
-    /* padding-top: 100px; */
 
 `

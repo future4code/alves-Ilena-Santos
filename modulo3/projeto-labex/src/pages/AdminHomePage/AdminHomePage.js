@@ -2,13 +2,16 @@ import React, { useState } from 'react'
 import { useGetTrips } from "../../hooks/useGetTrips"
 import { useNavigate } from "react-router-dom"
 import { goBack, goToTripDetailsPage, goToHomePage } from "../../routes/coordinator"
-import { ContainerButton, ContainerTrips, SectionPage, CardTrips, ContainerAdminHomePage, ContainerTitle, ContainerCreateTrip, ContainerElements } from './AdminHomePage-styled'
+import { ContainerButton, ContainerTrips, SectionPage, CardTrips, ContainerAdminHomePage, ContainerTitle, ContainerCreateTrip, ContainerElements, ButtonDelete } from './AdminHomePage-styled'
 import Title from '../../components/Title/Title'
 import { useProtectedPage } from '../../hooks/useProtectedPage'
 import CreateTripForm from '../../components/CreateTripForm/CreateTripForm'
 import axios from 'axios'
 import { BASE_URL } from '../../constants/BASE_URL'
 import { useEffect } from "react";
+import {P, Button} from "../../components/Letter-styled"
+import TrashCan from "../../img/trashcan.png"
+import { toast } from 'react-toastify'
 
 
 
@@ -41,12 +44,12 @@ export default function AdminHomePage() {
             auth: token
         }})
           .then((res) => {
-           alert("Viagem deletada")
+            toast.success("Viagem deletada!")
            handleDelete()
 
           })
           .catch((err) => {
-            alert("Erro ao deletar viagem")
+            toast.error("Erro ao deletar viagem")
           });
   }
   
@@ -56,9 +59,11 @@ export default function AdminHomePage() {
 
   const listOfTrips = trips?.map((trip) => {
     return (<CardTrips key={trip.id}>
-      <p >{trip.name}</p>
-      <button onClick={() => { handleOnClick(trip.id) }}>Ver detalhes</button>
-      <button onClick={()=>{deleteTrip(trip.id)}}>Deletar</button>
+      <P >{trip.name}</P>
+      <Button onClick={() => { handleOnClick(trip.id) }}>Ver detalhes</Button>
+      <ButtonDelete onClick={()=>{deleteTrip(trip.id)}}>
+        <img src={TrashCan} alt="desenho mão com polegar para baixo" height={30} width={30} />
+      </ButtonDelete>
     </CardTrips>
 
     )
@@ -68,7 +73,6 @@ export default function AdminHomePage() {
     <ContainerAdminHomePage>
       <SectionPage>
       <ContainerTitle>
-        {/* <h1 onClick={()=>{goToHomePage(navigate)}}>AdminHomePage</h1> */}
         <Title/>
       </ContainerTitle>
       <ContainerElements>
@@ -77,9 +81,6 @@ export default function AdminHomePage() {
         </ContainerTrips>
         <ContainerCreateTrip>
          <CreateTripForm handleCreatePage={handleCreatePage}/>
-          <ContainerButton>
-            <button onClick={() => { goBack(navigate) }}>Voltar</button>
-          </ContainerButton>
         </ContainerCreateTrip>
       </ContainerElements>
       </SectionPage>

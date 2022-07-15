@@ -15,30 +15,23 @@ justify-content: center;
 `
 
 export const SectionPage = styled.div`
-    display: grid;
+    display: flex;
+    flex-direction: column;
     width: 80%;
-    grid-template-columns: 1fr;
-    grid-template-rows: 80px 1fr ;
-    justify-content: center;
-    justify-items: center;
     color: white;
-    border: 1px green solid;
 `
 export const ContainerLogin =styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    justify-content: space-around;
-    height: 100px;
+    justify-content: space-between;
+    height: 150px;
     width: 300px;
     padding-top: 200px;
-    border: 1px red solid;
+    padding-left: 370px;
 
 `
 
 export const ContainerButton = styled.div`
     display: flex;
     justify-content: space-around;
-    /* width: 150px; */
-    /* height: 60px; */
 `

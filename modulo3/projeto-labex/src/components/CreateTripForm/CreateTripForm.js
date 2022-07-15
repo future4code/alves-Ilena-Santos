@@ -2,6 +2,7 @@ import React from 'react'
 import useForm from '../../hooks/useForm'
 import axios from "axios";
 import { BASE_URL } from "../../constants/BASE_URL";
+import { toast } from 'react-toastify'
 
 
 export default function CreateTripForm(props) {
@@ -19,13 +20,13 @@ export default function CreateTripForm(props) {
             auth: token
         }})
           .then((res) => {
-           alert("Criou viagem")
+            toast.success("Viagem criada!")
            props.handleCreatePage()
 
 
           })
           .catch((err) => {
-            alert("Erro na requisição")
+            toast.error("Erro ao criar viagem")
           });
     
           cleanFields()
@@ -34,7 +35,7 @@ export default function CreateTripForm(props) {
       
   return (
   <div>
-      <div>CreateTripForm</div>
+      <h3>Criar viagens</h3>
       <form onSubmit={onSubmitCreate}>
       <input placeholder='Nome'
       name='name'
@@ -44,6 +45,7 @@ export default function CreateTripForm(props) {
       required
       />
       <select onChange={onChange} placeholder="Planeta" name='planet' value={form.planet} required >
+        <option value={""}>Escolha Planeta</option>
         <option value={"mercury"}>Mercúrio</option>
         <option value={"venus"}>Vênus</option>
         <option value={"earth"}>Terra</option>
