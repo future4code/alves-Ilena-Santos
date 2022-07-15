@@ -3,7 +3,7 @@ import useForm from '../../hooks/useForm'
 import axios from "axios";
 import { BASE_URL } from "../../constants/BASE_URL";
 import { useGetTrips } from "../../hooks/useGetTrips"
-import CountryList from '../../components/CountryList';
+import CountryList from '../../components/CountryList';  //tentar fazer isso funcionar
 
 export default function ApplicationFormPage() {
   const { form, onChange, cleanFields } = useForm({ name: "", age: "", applicationText:"", profession:"", country:""});
@@ -19,19 +19,21 @@ export default function ApplicationFormPage() {
   
 
   const onSubmitApply = (event) => {
+
     event.preventDefault();
   console.log(form)
-    // axios
-    //   .post(`${BASE_URL}/trips/${id}/apply`, form,
-    //  )
-    //   .then((res) => {
-    //    alert("Aplicação feita")
-    //   })
-    //   .catch((err) => {
-    //     alert("Erro na requisição")
-    //   });
+  console.log("aqui o id",id)
+    axios
+      .post(`${BASE_URL}/trips/${id}/apply`, form,
+     )
+      .then((res) => {
+       alert("Aplicação feita")
+      })
+      .catch((err) => {
+        console.log(err.response.data)
+      });
 
-    //   cleanFields()
+      cleanFields()
   }
 
 const tripOptions = trips?.map((trip,index)=>{

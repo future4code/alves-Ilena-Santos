@@ -40,6 +40,7 @@ export default function CreateTripForm(props) {
       name='name'
       value={form.name} 
       onChange={onChange}
+      pattern={"^.{5,}"}
       required
       />
       <select onChange={onChange} placeholder="Planeta" name='planet' value={form.planet} required >
@@ -57,6 +58,7 @@ export default function CreateTripForm(props) {
        onChange={onChange}
        name='description'
        value={form.description}
+      //  pattern={"^.{30,}"}
        required
        />
       <input placeholder='Data'

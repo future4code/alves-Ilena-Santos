@@ -21,12 +21,10 @@ export function useGetTripDetails(path) {
             }}
         )
         .then((res) => {
-            console.log("deu bom",res.data)
           setLoading(false);
           setData(res.data);
         })
         .catch((err) => {
-          console.log("deu ruim",err.response);
           setLoading(false);
           setError(err.response.data);
         });
