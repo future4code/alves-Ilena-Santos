@@ -4,6 +4,7 @@ export const P = styled.p`
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Moonrocks&family=Space+Grotesk:wght@300&display=swap');
 font-family: 'Space Grotesk', sans-serif;
 font-weight: bold;
+margin: 5px;
 `
 
 export const Button = styled.button`
@@ -12,4 +13,5 @@ font-family: 'Space Grotesk', sans-serif;
 border: 1px solid black; 
 border-radius: 5px;
 font-weight: bold;
+min-width: 100px;
 `

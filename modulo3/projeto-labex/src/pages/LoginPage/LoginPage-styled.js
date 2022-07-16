@@ -17,21 +17,23 @@ justify-content: center;
 export const SectionPage = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 80%;
     color: white;
 `
-export const ContainerLogin =styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 150px;
-    width: 300px;
-    padding-top: 200px;
-    padding-left: 370px;
-
-`
 
 export const ContainerButton = styled.div`
+margin-top: 10px;
+    width: 100px;
+`
+
+export const ContainerForm = styled.form`
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    width: 300px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 190px;
+
 `

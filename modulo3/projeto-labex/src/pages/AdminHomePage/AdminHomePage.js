@@ -8,7 +8,6 @@ import { useProtectedPage } from '../../hooks/useProtectedPage'
 import CreateTripForm from '../../components/CreateTripForm/CreateTripForm'
 import axios from 'axios'
 import { BASE_URL } from '../../constants/BASE_URL'
-import { useEffect } from "react";
 import {P, Button} from "../../components/Letter-styled"
 import TrashCan from "../../img/trashcan.png"
 import { toast } from 'react-toastify'
@@ -19,8 +18,9 @@ export default function AdminHomePage() {
   useProtectedPage()
   const navigate = useNavigate()
   const [refresh, setRefresh] = useState(false) 
-  const { data, loading, erro } = useGetTrips("/trips",refresh);
+  const { data, loading, error } = useGetTrips("/trips",refresh);
   const trips = data?.trips;
+  console.log(data)
 
   const handleOnClick = (id) => {
     localStorage.setItem('id', id)
@@ -65,7 +65,6 @@ export default function AdminHomePage() {
         <img src={TrashCan} alt="desenho mão com polegar para baixo" height={30} width={30} />
       </ButtonDelete>
     </CardTrips>
-
     )
   })
 
@@ -83,6 +82,9 @@ export default function AdminHomePage() {
          <CreateTripForm handleCreatePage={handleCreatePage}/>
         </ContainerCreateTrip>
       </ContainerElements>
+      <ContainerButton>
+        <Button onClick={()=>{goBack(navigate)}}>Voltar</Button>
+      </ContainerButton>
       </SectionPage>
     </ContainerAdminHomePage>
   )

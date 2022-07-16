@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { BASE_URL } from "../constants/BASE_URL";
 import {useProtectedPage} from "../hooks/useProtectedPage"
 
-export function useGetTripDetails(path) {
+export function useGetTripDetails(path,refresh) {
    useProtectedPage()
     const [data, setData] = useState();
     const [loading, setLoading] = useState(false);
@@ -28,6 +28,6 @@ export function useGetTripDetails(path) {
           setLoading(false);
           setError(err.response.data);
         });
-    }, [path]);
+    }, [path,refresh]);
     return { data, loading, error };
   }

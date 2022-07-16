@@ -32,7 +32,7 @@ export const SectionPage = styled.div`
     display: grid;
     width: 100%;
     grid-template-columns:  1fr;
-    grid-template-rows: 80px 300px  ;
+    grid-template-rows: 80px 300px  30px;
     justify-content: center;
     justify-items: center;
     color: white;
@@ -73,11 +73,9 @@ export const ContainerCreateTrip = styled.div`
 `
 
 export const ContainerButton = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 150px;
-    height: 60px;
+    position: absolute;
+    padding-top: 250px;
+    padding-right: 750px;
 
 `
 

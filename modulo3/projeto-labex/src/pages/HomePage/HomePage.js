@@ -10,12 +10,11 @@ export default function HomePage() {
     return (
         <ContainerHomePage>
             <SectionPage>
-
-            <Title/>
-            <ContainerButton>
-                <Button onClick={() => { goToLoginPage(navigate) }}>Área Restrita</Button>
-                <Button onClick={() => { goToListTripsPage(navigate) }}>viagens espaciais</Button>
-            </ContainerButton>
+                <Title />
+                <ContainerButton>
+                    <Button onClick={() => { goToLoginPage(navigate) }}>Área Restrita</Button>
+                    <Button onClick={() => { goToListTripsPage(navigate) }}>Viagens Espaciais</Button>
+                </ContainerButton>
             </SectionPage>
         </ContainerHomePage>
     )

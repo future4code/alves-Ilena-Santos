@@ -4,7 +4,7 @@ import useForm from '../../hooks/useForm';
 import axios from "axios";
 import { BASE_URL } from "../../constants/BASE_URL";
 import { goToAdminHomePag, goToHomePage } from "../../routes/coordinator"
-import { ContainerLoginPage, SectionPage, ContainerLogin, ContainerButton } from './LoginPage-styled'
+import { ContainerLoginPage, SectionPage, ContainerButton , ContainerForm} from './LoginPage-styled'
 import Title from '../../components/Title/Title';
 import { Button } from '../../components/Letter-styled';
 
@@ -35,8 +35,8 @@ export default function LoginPage() {
     <ContainerLoginPage>
       <SectionPage>
         <Title />
-        <ContainerLogin>
-          <form onSubmit={onSubmitLogin}>
+        
+          <ContainerForm onSubmit={onSubmitLogin}>
             <input placeholder='E-mail'
               name="email"
               type={"email"}
@@ -53,9 +53,11 @@ export default function LoginPage() {
               pattern={"^.{6,}"}
               title={"Sua senha deve ter no mínimo 6 caracteres"}
             />
+            <ContainerButton>
+
             <Button>Entrar</Button>
-          </form>
-        </ContainerLogin>
+            </ContainerButton>
+          </ContainerForm>
       </SectionPage>
     </ContainerLoginPage>
   )
