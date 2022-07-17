@@ -12,6 +12,10 @@ O usuário acessará o link de surge informado na descrição deste projeto e co
 
 link do surge: https://ilena-labex.surge.sh/
 
+login para acesso a área restrita:
+e-mail: astrodev@gmail.com.br
+senha: 123456
+
 ### Linguagens e tecnologias utilizadas no projeto
 
 - JavaScript
