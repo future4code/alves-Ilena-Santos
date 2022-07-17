@@ -6,7 +6,7 @@ import { BASE_URL } from "../../constants/BASE_URL";
 import { goToAdminHomePag } from "../../routes/coordinator"
 import { ContainerLoginPage, SectionPage, ContainerButton, ContainerForm } from './LoginPage-styled'
 import Title from '../../components/Title/Title';
-import { Button } from '../../components/Letter-styled';
+import { Button, Input } from '../../components/Letter-styled';
 import { toast } from 'react-toastify'
 
 export default function LoginPage() {
@@ -35,14 +35,14 @@ export default function LoginPage() {
       <SectionPage>
         <Title />
         <ContainerForm onSubmit={onSubmitLogin}>
-          <input placeholder='E-mail'
+          <Input placeholder='E-mail'
             name="email"
             type={"email"}
             value={form.email}
             onChange={onChange}
             required
           />
-          <input placeholder='senha'
+          <Input placeholder='senha'
             name="password"
             type={"password"}
             value={form.password}
