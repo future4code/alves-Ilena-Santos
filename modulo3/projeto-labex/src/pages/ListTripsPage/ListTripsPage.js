@@ -6,8 +6,6 @@ import { goBack, goToApplicationFormPage } from "../../routes/coordinator"
 import Title from '../../components/Title/Title';
 import { P, Button } from '../../components/Letter-styled';
 
-
-
 export default function ListTripsPage() {
   const navigate = useNavigate()
   const { data, loading, erro } = useGetTrips("/trips");
@@ -21,12 +19,10 @@ export default function ListTripsPage() {
       <P> Descrição: {trip.description} </P>
       <P> Duração: {trip.durationInDays} dias</P>
     </CardTrips>
-
     )
   })
 
   return (
-
     <ContainerListTripsPage>
       <SectionPage>
         <Title/>
@@ -35,10 +31,9 @@ export default function ListTripsPage() {
         </ContainerTrips>
         <ContainerButton>
           <Button onClick={() => { goBack(navigate) }}>Voltar</Button>
-          <Button onClick={() => { goToApplicationFormPage(navigate) }}>Bora pro espaço?</Button>
+          <Button onClick={() => { goToApplicationFormPage(navigate) }}>Vamos pro espaço?</Button>
         </ContainerButton>
       </SectionPage>
     </ContainerListTripsPage>
-
   )
 }

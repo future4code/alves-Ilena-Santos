@@ -5,7 +5,13 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/BASE_URL";
 import { useGetTrips } from "../../hooks/useGetTrips"
 import { Countries } from '../../constants/Countries';
-import { ContainerApplicationFormPage, ContainerForm, DivSelectTrip, DivInputName, DivInputAge, DivInputText, DivInputProfession, DivSelectCountry, DivButton } from './ApplicationFormPage-styled';
+import { Button, Input, Select } from "../../components/Letter-styled"
+import { toast } from 'react-toastify'
+import {
+  ContainerApplicationFormPage, ContainerForm, DivSelectTrip,
+  DivInputName, DivInputAge, DivInputText,
+  DivInputProfession, DivSelectCountry, DivButton
+} from './ApplicationFormPage-styled';
 
 export default function ApplicationFormPage() {
   const { form, onChange, cleanFields } = useForm({ name: "", age: "", applicationText: "", profession: "", country: "" });
@@ -18,8 +24,6 @@ export default function ApplicationFormPage() {
     setId(event.target.value)
   }
 
-
-
   const onSubmitApply = (event) => {
 
     event.preventDefault();
@@ -29,10 +33,10 @@ export default function ApplicationFormPage() {
       .post(`${BASE_URL}/trips/${id}/apply`, form,
     )
       .then((res) => {
-        alert("Aplicação feita")
+        toast.success("Aplicação feita!")
       })
       .catch((err) => {
-        console.log(err.response.data)
+        toast.error("Erro ao fazer aplicação")
       });
 
     cleanFields()
@@ -42,67 +46,70 @@ export default function ApplicationFormPage() {
     return <option key={index} value={trip.id}> {trip.name}</option>
   })
 
-
   return (
     <ContainerApplicationFormPage>
-      <Title/>
+      <Title />
       <ContainerForm onSubmit={onSubmitApply}>
         <DivSelectTrip>
-          <select onChange={onChangeId} required >
+          <Select onChange={onChangeId} required >
             <option value="" >Escolha uma viagem</option>
             {tripOptions}
-          </select>
+          </Select>
         </DivSelectTrip>
         <DivInputName>
-          <input placeholder='Nome'
+          <Input placeholder='Nome'
             name='name'
             value={form.name}
             onChange={onChange}
+            pattern={"^.{3,}"}
+            title={"Seu nome deve ter no mínimo 3 letras"}
             required
           />
         </DivInputName>
         <DivInputAge>
-          <input placeholder='Idade'
+          <Input placeholder='Idade'
             onChange={onChange}
             name='age'
             value={form.age}
+            min={18}
+            title={"Idade mínima 18 anos"}
             required
           />
         </DivInputAge>
         <DivInputText>
-          <input placeholder='Texto de candidatura'
+          <Input placeholder='Texto de candidatura'
             onChange={onChange}
             name='applicationText'
             value={form.applicationText}
+            pattern={"^.{30,}"}
+            title={"Seu texto deve ter no mínimo 30 caracteres"}
             required
           />
         </DivInputText>
         <DivInputProfession>
-          <input placeholder='Profissão'
+          <Input placeholder='Profissão'
             onChange={onChange}
             name='profession'
             value={form.profession}
+            pattern={"^.{10,}"}
+            title={"Sua profissão deve ter no mínimo 10 caracteres"}
             required
           />
         </DivInputProfession>
         <DivSelectCountry>
-          <select onChange={onChange} name="country" placeholder='País' required>
+          <Select onChange={onChange} name="country" placeholder='País' required>
             <option value="" >País de Origem</option>
             {Countries.map((country, index) => {
               return (
                 <option value={country} key={index}>{country}</option>
               )
             })}
-          </select>
+          </Select>
         </DivSelectCountry>
-
-<DivButton>
-
-
-        <button>Aplicar-se</button>
-</DivButton>
+        <DivButton>
+          <Button>Aplicar-se</Button>
+        </DivButton>
       </ContainerForm>
     </ContainerApplicationFormPage>
-
   )
 }

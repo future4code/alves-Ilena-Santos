@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom"
 import useForm from '../../hooks/useForm';
 import axios from "axios";
 import { BASE_URL } from "../../constants/BASE_URL";
-import { goToAdminHomePag, goToHomePage } from "../../routes/coordinator"
-import { ContainerLoginPage, SectionPage, ContainerButton , ContainerForm} from './LoginPage-styled'
+import { goToAdminHomePag } from "../../routes/coordinator"
+import { ContainerLoginPage, SectionPage, ContainerButton, ContainerForm } from './LoginPage-styled'
 import Title from '../../components/Title/Title';
 import { Button } from '../../components/Letter-styled';
+import { toast } from 'react-toastify'
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -20,12 +21,10 @@ export default function LoginPage() {
       .post(`${BASE_URL}${path}`, form)
       .then((res) => {
         localStorage.setItem('token', res.data.token)
-
         goToAdminHomePag(navigate)
-        console.log("entrou aqui!!!!!!")
       })
       .catch((err) => {
-        alert("Usuário não autorizado!")
+        toast.error("Usuário não encontrado")
       });
 
     cleanFields()
@@ -35,29 +34,27 @@ export default function LoginPage() {
     <ContainerLoginPage>
       <SectionPage>
         <Title />
-        
-          <ContainerForm onSubmit={onSubmitLogin}>
-            <input placeholder='E-mail'
-              name="email"
-              type={"email"}
-              value={form.email}
-              onChange={onChange}
-              required
-            />
-            <input placeholder='senha'
-              name="password"
-              type={"password"}
-              value={form.password}
-              onChange={onChange}
-              required
-              pattern={"^.{6,}"}
-              title={"Sua senha deve ter no mínimo 6 caracteres"}
-            />
-            <ContainerButton>
-
+        <ContainerForm onSubmit={onSubmitLogin}>
+          <input placeholder='E-mail'
+            name="email"
+            type={"email"}
+            value={form.email}
+            onChange={onChange}
+            required
+          />
+          <input placeholder='senha'
+            name="password"
+            type={"password"}
+            value={form.password}
+            onChange={onChange}
+            required
+            pattern={"^.{6,}"}
+            title={"Sua senha deve ter no mínimo 6 caracteres"}
+          />
+          <ContainerButton>
             <Button>Entrar</Button>
-            </ContainerButton>
-          </ContainerForm>
+          </ContainerButton>
+        </ContainerForm>
       </SectionPage>
     </ContainerLoginPage>
   )

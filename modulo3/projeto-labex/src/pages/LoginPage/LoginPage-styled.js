@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import BgLoginPage from "../../img/background-LoginPage.jpg"
 
-
 export const ContainerLoginPage = styled.div`
 display: flex;
 justify-content: center;
@@ -22,11 +21,6 @@ export const SectionPage = styled.div`
     color: white;
 `
 
-export const ContainerButton = styled.div`
-margin-top: 10px;
-    width: 100px;
-`
-
 export const ContainerForm = styled.form`
     display: flex;
     flex-direction: column;
@@ -35,5 +29,10 @@ export const ContainerForm = styled.form`
     align-items: center;
     text-align: center;
     padding-top: 190px;
+    
+`
 
+export const ContainerButton = styled.div`
+    margin-top: 10px;
+        width: 100px;
 `

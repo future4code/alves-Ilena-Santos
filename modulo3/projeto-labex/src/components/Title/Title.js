@@ -3,7 +3,6 @@ import { goToHomePage } from "../../routes/coordinator"
 import { useNavigate } from "react-router-dom"
 import { ContainerTitle, H1 } from './Title-styled'
 
-
 export default function Title() {
   const navigate = useNavigate()
   return (

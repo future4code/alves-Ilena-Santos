@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import { goToLoginPage } from "../routes/coordinator";
+import { toast } from 'react-toastify'
 
 export const useProtectedPage = () => {
     const navigate = useNavigate()
@@ -8,7 +9,7 @@ export const useProtectedPage = () => {
     useEffect(()=>{
         const token = localStorage.getItem("token")
         if (token === null) {
-            alert("Acesso não autorizado!")
+            toast.error("Acesso não autorizado!")
             goToLoginPage(navigate)
         }
     },[])

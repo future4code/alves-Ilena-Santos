@@ -9,11 +9,17 @@ export const CardTrips = styled.div`
     margin: 20px;
     padding: 10px;
     background-color: #ECFBF5;
-   align-items: center;
-   justify-items: center;
-   box-shadow: 5px 5px 10px #7F7E7A;
-   color:black;
-    
+    align-items: center;
+    justify-items: center;
+    box-shadow: 5px 5px 10px #7F7E7A;
+    color:black; 
+    `
+export const ButtonDelete = styled.button`
+    border: none;
+    background-color: transparent;
+    :hover {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);}
 `
 export const ContainerAdminHomePage = styled.div`
 display: flex;
@@ -27,7 +33,6 @@ justify-content: center;
  background-position: center;
 `
 
-
 export const SectionPage = styled.div`
     display: grid;
     width: 100%;
@@ -37,8 +42,6 @@ export const SectionPage = styled.div`
     justify-items: center;
     color: white;
 `
-
-
 
 export const ContainerTitle = styled.div`
     display: flex;
@@ -51,9 +54,6 @@ export const ContainerElements = styled.div`
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    
-    
-
 `
 export const ContainerTrips = styled.div`
     width: 300px;
@@ -69,20 +69,11 @@ export const ContainerCreateTrip = styled.div`
     width: 100px;
     flex-direction: column;
     padding-right: 100px;
-
 `
 
 export const ContainerButton = styled.div`
     position: absolute;
     padding-top: 250px;
     padding-right: 750px;
-
 `
 
-export const ButtonDelete = styled.button`
-  border: none;
-  background-color: transparent;
-  :hover {
-  -webkit-transform: scale(1.3);
-  transform: scale(1.3);}
-`

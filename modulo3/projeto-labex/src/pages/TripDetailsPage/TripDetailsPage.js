@@ -10,6 +10,7 @@ import { goBack } from "../../routes/coordinator"
 import { P, Button } from "../../components/Letter-styled"
 import axios from 'axios';
 import { BASE_URL } from '../../constants/BASE_URL';
+import { toast } from 'react-toastify'
 
 
 export default function TripDetailsPage() {
@@ -34,14 +35,14 @@ export default function TripDetailsPage() {
     })
     .then((res)=>{
       if (choice === true){
-        console.log("Aprovado")
+        toast.success("Candidato Aprovado!")
         setRefresh(!refresh)
       } else {
-        console.log("Reprovado")
+        toast.error("Candidato Reprovado!")
         setRefresh(!refresh)
       }
     }).catch((err)=>{
-      console.log("Deu ruim", err)
+      toast.error("Erro na requisição!")
     })
   }
 
@@ -59,12 +60,9 @@ export default function TripDetailsPage() {
 
   const approved = trip?.approved.map((approved, index) => {
     return (
-     
-      
       <CardApproved key={index} >
       <P>Nome: {approved.name}</P>
       </CardApproved>
-     
     )
   })
 

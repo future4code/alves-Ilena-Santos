@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useGetTrips } from "../../hooks/useGetTrips"
 import { useNavigate } from "react-router-dom"
-import { goBack, goToTripDetailsPage, goToHomePage } from "../../routes/coordinator"
+import { goBack, goToTripDetailsPage } from "../../routes/coordinator"
 import { ContainerButton, ContainerTrips, SectionPage, CardTrips, ContainerAdminHomePage, ContainerTitle, ContainerCreateTrip, ContainerElements, ButtonDelete } from './AdminHomePage-styled'
 import Title from '../../components/Title/Title'
 import { useProtectedPage } from '../../hooks/useProtectedPage'
@@ -11,8 +11,6 @@ import { BASE_URL } from '../../constants/BASE_URL'
 import {P, Button} from "../../components/Letter-styled"
 import TrashCan from "../../img/trashcan.png"
 import { toast } from 'react-toastify'
-
-
 
 export default function AdminHomePage() {
   useProtectedPage()
@@ -44,7 +42,7 @@ export default function AdminHomePage() {
             auth: token
         }})
           .then((res) => {
-            toast.success("Viagem deletada!")
+          toast.success("Viagem deletada!")
            handleDelete()
 
           })
@@ -53,9 +51,6 @@ export default function AdminHomePage() {
           });
   }
   
-  // const logOut =( ) =>{
-
-  // }
 
   const listOfTrips = trips?.map((trip) => {
     return (<CardTrips key={trip.id}>

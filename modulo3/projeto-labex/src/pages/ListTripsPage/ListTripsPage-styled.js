@@ -1,18 +1,6 @@
 import styled from "styled-components";
 import BgListTripsPage from "../../img/background-ListTripPage.jpg"
 
-export const ContainerListTripsPage = styled.div`
-display: flex;
-justify-content: center;
- width: 100vw;
- min-height: 900px;
- position: absolute;
- background-image: url(${BgListTripsPage}) ;
- background-repeat: no-repeat;
- background-size: cover;
- background-position: center;
-`
-
 export const CardTrips = styled.div`
     display: grid;
     grid-template-columns: 1fr;
@@ -30,15 +18,16 @@ export const CardTrips = styled.div`
    color:black;
     
 `
-
-export const ContainerTrips = styled.div`
+export const ContainerListTripsPage = styled.div`
 display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-justify-content: space-around;
-width: 100%;
-overflow-y: scroll;
-max-height: 290px;
+justify-content: center;
+ width: 100vw;
+ min-height: 900px;
+ position: absolute;
+ background-image: url(${BgListTripsPage}) ;
+ background-repeat: no-repeat;
+ background-size: cover;
+ background-position: center;
 `
 
 export const SectionPage = styled.div`
@@ -50,6 +39,17 @@ export const SectionPage = styled.div`
     justify-items: center;
     color: white;
 `
+
+export const ContainerTrips = styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-around;
+width: 100%;
+overflow-y: scroll;
+max-height: 290px;
+`
+
 export const ContainerButton = styled.div`
     display: flex;
     flex-direction: column;
