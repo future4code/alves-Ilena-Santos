@@ -8,10 +8,10 @@ export const goToSignUp =(navigate)=>{
 }
 
 export const goToFeed =(navigate)=>{
-    navigate("/feed")
+    navigate("/")
 }
 
 export const goToPost =(navigate,id)=>{
-navigate(`/post/${id}`)
+navigate(`/posts/${id}`)
 }
 

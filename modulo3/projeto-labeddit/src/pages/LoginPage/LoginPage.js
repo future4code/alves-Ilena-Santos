@@ -19,8 +19,6 @@ export default function LoginPage() {
   const onSubmitForm = (event)=>{
     event.preventDefault()
     login(form,cleanFields,navigate)
-
-
   }
 
   

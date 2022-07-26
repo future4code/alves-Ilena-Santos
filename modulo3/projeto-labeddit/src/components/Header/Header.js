@@ -29,7 +29,7 @@ const headerOptions = () =>{
           <button onClick={()=>goToLogin(navigate)}>Entrar</button>
         </div>
       )
-    } else if (window.location.pathname ==="/feed") {
+    } else if (window.location.pathname ==="/") {
       return(
         <div>
           <h3>LOGO</h3>

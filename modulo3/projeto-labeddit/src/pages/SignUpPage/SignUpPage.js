@@ -1,6 +1,5 @@
 import React from 'react'
 import useForm from '../../hooks/useForm'
-import {goToFeed} from '../../routes/cordinator'
 import { useNavigate } from 'react-router-dom'
 import { useUnprotectedPage } from '../../hooks/useUnprotectedPage'
 import { signUp } from '../../services/users'
@@ -31,7 +30,7 @@ export default function SignUpPage() {
         <input name={"email"}
         value={form.email}
         onChange={onChange}
-        placeholder = "Nome"
+        placeholder = "E-mail"
         required
         type={"email"}
         />
@@ -41,6 +40,8 @@ export default function SignUpPage() {
         placeholder = "Senha"
         required
         type={"password"}
+        pattern={'^.{8,30}'}
+        title={"A senha deve conter no mínimo 8 e no máximo 30 caracteres"}
         />
         <button>Cadastrar</button>
       </form>

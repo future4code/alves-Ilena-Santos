@@ -12,7 +12,7 @@ export const login = (body,cleanFields,navigate)=>{
 
     })
     .catch((err)=>{
-      alert(err.response.data.message)
+      alert(err.response.data)
     })
   }
 
@@ -25,6 +25,6 @@ export const login = (body,cleanFields,navigate)=>{
 
     })
     .catch((err)=>{
-      alert(err.response.data.message)
+      alert(err.response.data)
     })
   }
