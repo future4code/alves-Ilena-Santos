@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { goToLogin } from '../../routes/cordinator'
-import { ContainerHeaderSignup } from './Header-styled'
+import { ContainerHeader } from './Header-styled'
 import Logo from "../../assets/Logo2.svg"
 
 
@@ -26,24 +26,24 @@ const headerOptions = () =>{
       )
     } else if (window.location.pathname ==="/cadastro"){
       return(
-        <ContainerHeaderSignup>
+        <ContainerHeader>
           <img src={Logo}/>
           <button onClick={()=>goToLogin(navigate)}>Entrar</button>
-        </ContainerHeaderSignup>
+        </ContainerHeader>
       )
     } else if (window.location.pathname ==="/") {
       return(
-        <div>
-          <h3>LOGO</h3>
+        <ContainerHeader>
+          <img src={Logo}/>
           <button onClick={logout}>Logout</button>
-        </div>
+        </ContainerHeader>
       )
-    } else if (window.location.pathname ==="/post/:id") {
+    } else if (window.location.pathname.includes("/posts")) {
       return(
-        <div>
-          <h3>LOGO</h3>
+        <ContainerHeader>
+          <img src={Logo}/>
           <button onClick={logout}>Logout</button>
-        </div>
+        </ContainerHeader>
       )
     }
 }

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const ContainerHeaderSignup = styled.div`
+export const ContainerHeader = styled.div`
 display: flex;
 position: absolute;
 width: 100vw;

@@ -24,7 +24,7 @@ export default function SignUpPage() {
       <form onSubmit={onSubmitForm}>
         <ContainerInput>
           <input name={"username"}
-            value={form.name}
+            value={form.username}
             onChange={onChange}
             placeholder="Nome"
             required

@@ -14,7 +14,7 @@ export default function useRequestData(inicialData, url, refresh) {
         .then((res)=>{
             setData(res.data)
         }).catch((err)=>{
-            console.log(err)
+            console.log(err.message)
         })
     },[url,refresh])
   return ( data )

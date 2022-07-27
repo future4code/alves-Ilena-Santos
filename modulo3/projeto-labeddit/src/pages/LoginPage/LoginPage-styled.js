@@ -100,8 +100,9 @@ color: #FE7E02;
 
 export const ImgLine = styled.img`
 position: absolute;
-width: 20rem;
+width: 82%;
 height: 0.625rem;
-left: 2.063rem;
+left: 2rem;
+right: 2rem;
 top: 36rem;
 `
