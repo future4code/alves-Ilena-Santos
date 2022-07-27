@@ -3,11 +3,12 @@ import styled from "styled-components";
 export const ContainerLogin = styled.div`
 @media (max-width: 480px) {
     
-    P{
+    p{
     position: absolute;
-    width: 23.625rem;
+    left: 1.3rem;
+    width: 20rem;
     height: 1.313rem;
-    top:17.188rem;
+    top:14rem;
     font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 300;
@@ -25,8 +26,8 @@ export const ImgLogo = styled.img`
  position: absolute;
 width: 9.5rem;
 height: 8.875rem;
-left: 8rem;
-top:8.313rem;
+left: 7.3rem;
+top:5rem;
 `
 
 export const InputName = styled.input`
@@ -35,7 +36,7 @@ height: 3.75rem;
 /* width: 363px; */
 left: 2.063rem;
 right: 2.063rem;
-top: 25.188rem;
+top: 21rem;
 border-radius: 0.25;
 border: 1px solid #D5D8DE;
 font-family: 'Noto Sans';
@@ -52,7 +53,7 @@ height: 3.75rem;
 /* width: 363px; */
 left: 2.063rem;
 right: 2.063rem;
-top: 29.438rem;
+top: 26rem;
 border-radius: 0.25rem;
 border: 1px solid #D5D8DE;
 font-family: 'Noto Sans';
@@ -69,7 +70,7 @@ height: 3.188rem;
 /* width: 365px; */
 left: 1.813rem;
 right: 1.813rem;
-top: 36.688rem;
+top: 32rem;
 border-radius: 1.688rem;
 background: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%);
 font-family: 'Noto Sans';
@@ -86,7 +87,7 @@ height: 3.188rem;
 /* width: 365px; */
 left: 1.813rem;
 right: 1.813rem;
-top: 42.25rem;
+top: 37.5rem;
 border-radius: 1.688rem;
 border: 1px solid #FE7E02;
 border-radius: 1.688rem;
@@ -102,5 +103,5 @@ position: absolute;
 width: 20rem;
 height: 0.625rem;
 left: 2.063rem;
-top: 40.625rem;
+top: 36rem;
 `

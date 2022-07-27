@@ -2,6 +2,8 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { goToLogin } from '../../routes/cordinator'
+import { ContainerHeaderSignup } from './Header-styled'
+import Logo from "../../assets/Logo2.svg"
 
 
 export default function Header() {
@@ -24,10 +26,10 @@ const headerOptions = () =>{
       )
     } else if (window.location.pathname ==="/cadastro"){
       return(
-        <div>
-          <h3>LOGO</h3>
+        <ContainerHeaderSignup>
+          <img src={Logo}/>
           <button onClick={()=>goToLogin(navigate)}>Entrar</button>
-        </div>
+        </ContainerHeaderSignup>
       )
     } else if (window.location.pathname ==="/") {
       return(
