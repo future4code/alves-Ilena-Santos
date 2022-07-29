@@ -6,11 +6,11 @@ import { goToFeed } from "../routes/cordinator";
 export const useUnprotectedPage = () => {
     const navigate = useNavigate()
 
-    useEffect(()=>{
+    useEffect(() => {
         const token = localStorage.getItem("token")
         if (token) {
             goToFeed(navigate)
         }
-    },[navigate])
+    }, [navigate])
 
 } 

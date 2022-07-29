@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useForm from '../../hooks/useForm'
 import { useNavigate } from 'react-router-dom'
 import { useUnprotectedPage } from '../../hooks/useUnprotectedPage'
 import { signUp } from '../../services/users'
 import { ContainerSignup, ContainerInput, ContainerCheckBox, LegalText } from "./SignUpPage-styled"
-
+import Loading1 from "../../assets/loading1.gif"
 
 export default function SignUpPage() {
   useUnprotectedPage()
@@ -12,10 +12,11 @@ export default function SignUpPage() {
   const navigate = useNavigate()
 
   const { form, onChange, cleanFields } = useForm({ username: "", email: "", password: "" })
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmitForm = (event) => {
     event.preventDefault()
-    signUp(form, cleanFields, navigate)
+    signUp(form, cleanFields, navigate, setIsLoading)
   }
 
   return (
@@ -54,7 +55,9 @@ export default function SignUpPage() {
           <input type="checkbox" required />
           <p>Eu concordo em receber emails sobre coisas legais no LabEddit</p>
         </ContainerCheckBox>
-          <button>Cadastrar</button>
+        <button>
+          {isLoading ? <img src={Loading1} width={30} /> : <>Cadastrar</>}
+        </button>
       </form>
     </ContainerSignup>
   )

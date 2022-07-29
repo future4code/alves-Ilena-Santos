@@ -10,9 +10,8 @@ export const addComment = (body,cleanFields,id,refresh, setRefresh)=>{
     .then((res)=>{
       cleanFields()
       setRefresh(!refresh)
-      
     })
     .catch((err)=>{
-      alert(err.response.data)
+      alert("Erro ao adicionar comentário :(")
     })
   }

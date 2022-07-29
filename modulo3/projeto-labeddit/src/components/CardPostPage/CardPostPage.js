@@ -1,8 +1,7 @@
 import React from 'react'
-import { ContainerCards, ContainerCardComment, TextName, TextBody, SectionClick, SectionLike } from './CardPostPage.styled'
+import { ContainerCardComment, TextName, TextBody, SectionClick, SectionLike } from './CardPostPage.styled'
 import Like from "../../assets/like.svg"
 import Dislike from "../../assets/dislike.svg"
-import CommentBox from "../../assets/comments.svg"
 
 export default function CardPostPage(props) {
 
@@ -13,9 +12,9 @@ export default function CardPostPage(props) {
         <TextBody>{comment.body}</TextBody>
         <SectionClick>
           <SectionLike>
-            <img src={Like} />
+            <img src={Like} onClick={() => { props.like(comment.id) }} />
             <p>{comment.voteSum}</p>
-            <img src={Dislike} />
+            <img src={Dislike} onClick={() => { props.dislike(comment.id) }} />
           </SectionLike>
         </SectionClick>
       </ContainerCardComment>
@@ -23,6 +22,6 @@ export default function CardPostPage(props) {
   })
 
   return (
-    <ContainerCards>{commentsList}</ContainerCards>
+    <div>{commentsList}</div>
   )
 }

@@ -1,4 +1,1 @@
-export const BASE_URL = "https://labeddit.herokuapp.com"
-
-// demo_email = "demo.email@gmail.com"
-// demo_pass = demo.password
+export const BASE_URL = "https://labeddit-2.herokuapp.com"

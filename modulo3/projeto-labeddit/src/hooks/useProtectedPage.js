@@ -6,12 +6,12 @@ import { goToLogin } from "../routes/cordinator";
 export const useProtectedPage = () => {
     const navigate = useNavigate()
 
-    useEffect(()=>{
+    useEffect(() => {
         const token = localStorage.getItem("token")
         if (token === null) {
             alert("Acesso não autorizado!")
             goToLogin(navigate)
         }
-    },[navigate])
+    }, [navigate])
 
 } 

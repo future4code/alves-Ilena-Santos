@@ -3,98 +3,85 @@ import styled from "styled-components";
 export const ContainerSignup = styled.div`
 display: flex;
 flex-direction: column;
-padding: 8px;
+padding: 0.5rem;
 h3{
     position: absolute;
-left: 32px;
-top: 100px;
+left: 2rem;
+top: 6.25rem;
 padding: 0;
 margin: 0;
-
 font-family: 'Noto Sans';
 font-style: normal;
 font-weight: 700;
-font-size: 33px;
-line-height: 43px;
-
+font-size: 2.063rem;
+line-height: 2.688rem;
 color: #373737;
 }
+
 button{
     position: absolute;
-/* width: 365px; */
-height: 51px;
-left: 32px;
-right: 32px;
-top: 600px;
-
+height: 3.188rem;
+left: 2rem;
+right: 2rem;
+top: 37.5rem;
 background: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%);
-border-radius: 27px;
+border-radius: 1.688rem;
 border: none;
-
 color: #FFFFFF;
 font-family: 'Noto Sans';
 font-style: normal;
 }
-
 `
 
 export const ContainerInput = styled.div`
 display: flex;
 flex-direction: column;
 position: absolute;
-top: 230px;
-left:28px;
-right: 28px;
-
+top: 14.375rem;
+left:1.75rem;
+right: 1.75rem;
 input{
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
     border: 1px solid #D5D8DE;
-    height: 60px;
-    border-radius: 4px;
+    height: 3.75rem;
+    border-radius: 0.25rem;
     font-family: 'Noto Sans';
 font-style: normal;
-padding-left: 10px;
+padding-left: 0.625rem;
 }
-
 `
 
 
 export const LegalText = styled.p`
 position: absolute;
-/* width: 361.02px; */
-height: 38px;
-left: 34px;
-right: 34px;
-top: 450px;
-
+height: 2.375rem;
+left: 2.125rem;
+right: 2.125rem;
+top: 28.125rem;
 font-family: 'Noto Sans';
 font-style: normal;
 font-weight: 400;
-font-size: 14px;
-line-height: 19px;
-
+font-size:0.875rem;
+line-height: 1.188rem;
 color: #000000;
 a{
     text-decoration: none;
     color:#4088CB;
 }
-
 `
 export const ContainerCheckBox = styled.div`
 display: flex;
 position: absolute;
-top: 530px;
-left: 20px;
-right: 10px;
-gap: 5px;
+top:33.125rem;
+left:1.25rem;
+right: 0.625rem;
+gap: 0.313rem;
 p{
     font-family: 'Noto Sans';
 font-style: normal;
 font-weight: 400;
-font-size: 14px;
-line-height: 19px;
-
+font-size: 0.875rem;
+line-height: 1.188rem;
 color: #000000;
 }
-
 `

@@ -6,28 +6,30 @@ import { BASE_URL } from "../../constants/urls"
 import CardFeed from '../../components/CardFeed/CardFeed'
 import useForm from '../../hooks/useForm'
 import { addPost } from '../../services/posts'
-import {InputBody, InputTitle, ButtonPost, ImgLine} from "./FeedPage-styled"
+import { InputBody, InputTitle, ButtonPost, ImgLine, ImgLoading } from "./FeedPage-styled"
 import Line from "../../assets/Line.svg"
+
 
 export default function FeedPage() {
   useProtectedPage()
   const [refresh, setRefresh] = useState(false)
   const [likePost, setLikePost] = useState(false)
-  const [dislikePost, setDislikePost] =useState(false)
-  const posts = useRequestData([], `${BASE_URL}/posts`, refresh)
+  const [dislikePost, setDislikePost] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const posts = useRequestData([], `${BASE_URL}/posts`, refresh, setIsLoading)
 
   const { form, onChange, cleanFields } = useForm({ title: "", body: "" })
 
-  const token = localStorage.getItem("token")
   const onSubmitForm = (event) => {
     event.preventDefault()
     addPost(form, cleanFields, setRefresh, refresh)
   }
 
-  const like = (id) =>{
-    if(likePost===true) {
-      //funcao de remover
-      removeVote(setLikePost,likePost,id)
+  const token = localStorage.getItem("token")
+
+  const like = (id) => {
+    if (likePost === true) {
+      removeVote(setLikePost, likePost, id)
       setLikePost(!likePost)
     } else {
       const body = {
@@ -35,24 +37,21 @@ export default function FeedPage() {
       }
       axios.post(`${BASE_URL}/posts/${id}/votes`, body, {
         headers: {
-            Authorization: token
+          Authorization: token
         }
-    })
-      .then((res)=>{
-        setLikePost(!likePost)
-        setRefresh(!refresh)
-        console.log("aqui")
       })
-      .catch((err)=>{
-        alert(err.response.data)
-      })
+        .then((res) => {
+          setLikePost(!likePost)
+          setRefresh(!refresh)
+        })
+        .catch((err) => {
+        })
     }
   }
 
-  const dislike = (id) =>{
-    if (dislikePost===true) {
-      // funçao de deletar
-      removeVote(setDislikePost,dislikePost,id)
+  const dislike = (id) => {
+    if (dislikePost === true) {
+      removeVote(setDislikePost, dislikePost, id)
       setDislikePost(!dislikePost)
     } else {
       const body = {
@@ -60,34 +59,30 @@ export default function FeedPage() {
       }
       axios.put(`${BASE_URL}/posts/${id}/votes`, body, {
         headers: {
-            Authorization: token
+          Authorization: token
         }
-    })
-      .then((res)=>{
-        setDislikePost(!dislikePost)
-        setRefresh(!refresh)
-        console.log("aqui no dislike")
       })
-      .catch((err)=>{
-        alert(err.response.data)
-      })
+        .then((res) => {
+          setDislikePost(!dislikePost)
+          setRefresh(!refresh)
+        })
+        .catch((err) => {
+        })
     }
   }
 
-  const removeVote = (setVote,voteName,id) => {
+  const removeVote = (setVote, voteName, id) => {
     axios.delete(`${BASE_URL}/posts/${id}/votes`, {
       headers: {
-          Authorization: token
+        Authorization: token
       }
-  })
-    .then((res)=>{
-      console.log("pegou o delete")
-      setVote(!voteName)
-      setRefresh(!refresh)
     })
-    .catch((err)=>{
-      alert(err.response.data)
-    })
+      .then((res) => {
+        setVote(!voteName)
+        setRefresh(!refresh)
+      })
+      .catch((err) => {
+      })
   }
 
 
@@ -108,8 +103,8 @@ export default function FeedPage() {
         />
         <ButtonPost>Postar</ButtonPost>
       </form>
-      <ImgLine src={Line}/>
-      <CardFeed posts={posts} like={like} dislike={dislike}/>
+      <ImgLine src={Line} />
+      <CardFeed posts={posts} like={like} dislike={dislike} />
     </div>
 
   )

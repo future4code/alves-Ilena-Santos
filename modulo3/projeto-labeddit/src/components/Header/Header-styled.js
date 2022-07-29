@@ -1,34 +1,56 @@
 import styled from "styled-components";
 
-
 export const ContainerHeader = styled.div`
 display: flex;
 position: absolute;
 width: 100vw;
-height: 50px;
+height: 3.125rem;
 left: 0px;
 top: 0;
 background: #EDEDED;
 img{
     position: absolute;
-width: 28.02px;
-height: 28.64px;
-left: 170px;
-top: 10.91px;
+width: 1.75rem;
+height: 1.79rem;
+left: 10.625rem;
+top: 0.682rem;
 }
 button{
     position: absolute;
-width: 55px;
-height: 25px;
-left: 300px;
-top: 10px;
+width: 3.438rem;
+height:1.563rem;
+left: 18.75rem;
+top: 0.625rem;
 background: none;
 border: none;
 
 font-family: 'Noto Sans';
 font-style: normal;
-font-size: 18px;
+font-size: 1.125rem;
 color: #4088CB;
 }
+`
 
+export const ContainerHeaderPost = styled.div`
+display: flex;
+justify-content: space-around;
+align-items: center;
+position: absolute;
+width: 100vw;
+height: 3.125rem;
+background: #EDEDED;
+img{
+width: 1.75rem;
+height: 1.79rem;
+}
+button{
+width: 3.438rem;
+height:1.563rem;
+background: none;
+border: none;
+font-family: 'Noto Sans';
+font-style: normal;
+font-size: 1.125rem;
+color: #4088CB;
+}
 `

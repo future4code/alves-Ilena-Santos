@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const ContainerLogin = styled.div`
-@media (max-width: 480px) {
-    
     p{
     position: absolute;
     left: 1.3rem;
@@ -16,14 +14,11 @@ export const ContainerLogin = styled.div`
     line-height: 1.313rem;
     text-align: center;
     color: #000000;
-    }
 }
-
-
 `
 
 export const ImgLogo = styled.img`
- position: absolute;
+position: absolute;
 width: 9.5rem;
 height: 8.875rem;
 left: 7.3rem;
@@ -33,7 +28,6 @@ top:5rem;
 export const InputName = styled.input`
  position: absolute;
 height: 3.75rem;
-/* width: 363px; */
 left: 2.063rem;
 right: 2.063rem;
 top: 21rem;
@@ -50,7 +44,6 @@ opacity: 0.8;
 export const InputPassword = styled.input`
 position: absolute;
 height: 3.75rem;
-/* width: 363px; */
 left: 2.063rem;
 right: 2.063rem;
 top: 26rem;
@@ -67,7 +60,6 @@ opacity: 0.8;
 export const ButtonContinue = styled.button`
 position: absolute;
 height: 3.188rem;
-/* width: 365px; */
 left: 1.813rem;
 right: 1.813rem;
 top: 32rem;
@@ -81,10 +73,18 @@ color: #FFFFFF;
 border: none;
 `
 
+export const ImgLine = styled.img`
+position: absolute;
+width: 82%;
+height: 0.625rem;
+left: 2rem;
+right: 2rem;
+top: 36rem;
+`
+
 export const ButtonSignUp = styled.button`
 position: absolute;
 height: 3.188rem;
-/* width: 365px; */
 left: 1.813rem;
 right: 1.813rem;
 top: 37.5rem;
@@ -96,13 +96,4 @@ font-style: normal;
 font-size: 1.125rem;
 line-height: 1.563rem;
 color: #FE7E02;
-`
-
-export const ImgLine = styled.img`
-position: absolute;
-width: 82%;
-height: 0.625rem;
-left: 2rem;
-right: 2rem;
-top: 36rem;
 `
