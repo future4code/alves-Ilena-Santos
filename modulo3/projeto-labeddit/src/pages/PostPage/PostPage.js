@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from "axios"
 import { useProtectedPage } from '../../hooks/useProtectedPage'
 import useRequestData from '../../hooks/useRequestData'
@@ -8,9 +8,11 @@ import CardPostPage from "../../components/CardPostPage/CardPostPage"
 import useForm from '../../hooks/useForm'
 import { addComment } from '../../services/comments'
 import { ContainerCardFeed, TextName, TextBody, SectionClick, SectionLike, SectionComment } from '../../components/CardFeed/CardFeed.styled'
-import { ContainerPost, InputBody, ButtonComment, ContainerPage, Comments, ImgLoading } from './PostPage-styled'
+import { ContainerPost, ButtonComment, ContainerPage, Comments, ImgLoading, TextAreaBody } from './PostPage-styled'
 import Like from "../../assets/like.svg"
+import LikeGrey from "../../assets/likeGrey.jpeg"
 import Dislike from "../../assets/dislike.svg"
+import DislikeGrey from "../../assets/dislikeGrey.jpeg"
 import CommentBox from "../../assets/comments.svg"
 import Loading2 from "../../assets/loading2.gif"
 
@@ -19,7 +21,7 @@ export default function PostPage() {
   const params = useParams()
   const [refresh, setRefresh] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const posts = useRequestData([], `${BASE_URL}/posts`, refresh, setIsLoading)
+  const posts = useRequestData([], `${BASE_URL}/posts?size=500`, refresh, setIsLoading)
   const postInfo = useRequestData([], `${BASE_URL}/posts/${params.id}/comments`, refresh, setIsLoading)
   const { form, onChange, cleanFields } = useForm({ body: "" })
 
@@ -159,6 +161,21 @@ export default function PostPage() {
 
   const chosenPost = posts.map((post) => {
     if (post.id === params.id) {
+      const imgLike = () => {
+        if (post.userVote === 1) {
+          return <img src={LikeGrey} alt="seta cinza para cima"/>
+        } else {
+          return <img src={Like} alt="seta para cima" />
+        }
+      }
+
+      const imgDislike = () => {
+        if (post.userVote === -1) {
+          return <img src={DislikeGrey} alt="seta cinza para baixo" />
+        } else {
+          return <img src={Dislike} alt="seta para baixo" />
+        }
+      }
       return (
         <ContainerCardFeed key={post.id}>
           <TextName>Enviado por: {post.username}</TextName>
@@ -166,15 +183,15 @@ export default function PostPage() {
           <SectionClick>
             <SectionLike>
               <button onClick={() => { likeChosenPost(post.id) }}>
-                <img src={Like} />
+                {imgLike()}
               </button >
               <p>{post.voteSum}</p>
-              <button>
-                <img src={Dislike} onClick={() => { dislikeChosenPost(post.id) }} />
+              <button onClick={() => { dislikeChosenPost(post.id) }} >
+                {imgDislike()}
               </button>
             </SectionLike>
             <SectionComment>
-              <img src={CommentBox} />
+              <img src={CommentBox} alt="imagem caixa de comentário" />
               <p>{post.commentCount}</p>
             </SectionComment>
           </SectionClick>
@@ -191,7 +208,7 @@ export default function PostPage() {
         {isLoading ? <ImgLoading src={Loading2} /> : <>{chosenPost}</>}
       </ContainerPost>
       <form onSubmit={onSubmitForm}>
-        <InputBody name={"body"}
+        <TextAreaBody name={"body"}
           value={form.body}
           onChange={onChange}
           placeholder="Adicionar comentário"

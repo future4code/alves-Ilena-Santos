@@ -42,7 +42,7 @@ export default function LoginPage() {
           type={"password"}
         />
         <ButtonContinue>
-          {isLoading ? <img src={Loading1} width={30} /> : <>Continuar</>}
+          {isLoading ? <img src={Loading1} width={30} alt="Carregando"/> : <>Continuar</>}
         </ButtonContinue>
       </form>
       <ImgLine src={Line} />

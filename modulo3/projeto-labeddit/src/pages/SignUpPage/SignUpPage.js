@@ -56,7 +56,7 @@ export default function SignUpPage() {
           <p>Eu concordo em receber emails sobre coisas legais no LabEddit</p>
         </ContainerCheckBox>
         <button>
-          {isLoading ? <img src={Loading1} width={30} /> : <>Cadastrar</>}
+          {isLoading ? <img src={Loading1} width={30} alt="carregando" /> : <>Cadastrar</>}
         </button>
       </form>
     </ContainerSignup>

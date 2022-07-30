@@ -28,14 +28,14 @@ export default function Header() {
     } else if (window.location.pathname === "/cadastro") {
       return (
         <ContainerHeader>
-          <img src={Logo} />
+          <img src={Logo} alt="logo do site"/>
           <button onClick={() => goToLogin(navigate)}>Entrar</button>
         </ContainerHeader>
       )
-    } else if (window.location.pathname === "/") {
+    } else if (window.location.pathname === "/feed") {
       return (
         <ContainerHeader>
-          <img src={Logo} />
+          <img src={Logo} alt="logo do site" />
           <button onClick={logout}>Logout</button>
         </ContainerHeader>
       )
@@ -43,9 +43,9 @@ export default function Header() {
       return (
         <ContainerHeaderPost>
           <button onClick={() => goToFeed(navigate)}>
-            <img src={Close} />
+            <img src={Close} alt="X"/>
           </button>
-          <img src={Logo} />
+          <img src={Logo} alt="logo do site" />
           <button onClick={logout}>Logout</button>
         </ContainerHeaderPost>
       )

@@ -6,7 +6,7 @@ import { BASE_URL } from "../../constants/urls"
 import CardFeed from '../../components/CardFeed/CardFeed'
 import useForm from '../../hooks/useForm'
 import { addPost } from '../../services/posts'
-import { InputBody, InputTitle, ButtonPost, ImgLine, ImgLoading } from "./FeedPage-styled"
+import { InputTitle, ButtonPost, ImgLine, ImgLoading, TextAreaBody } from "./FeedPage-styled"
 import Line from "../../assets/Line.svg"
 
 
@@ -15,8 +15,9 @@ export default function FeedPage() {
   const [refresh, setRefresh] = useState(false)
   const [likePost, setLikePost] = useState(false)
   const [dislikePost, setDislikePost] = useState(false)
+  const [arrowColor, setArrowColor] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const posts = useRequestData([], `${BASE_URL}/posts`, refresh, setIsLoading)
+  const posts = useRequestData([], `${BASE_URL}/posts?size=500`, refresh, setIsLoading)
 
   const { form, onChange, cleanFields } = useForm({ title: "", body: "" })
 
@@ -43,6 +44,7 @@ export default function FeedPage() {
         .then((res) => {
           setLikePost(!likePost)
           setRefresh(!refresh)
+          setArrowColor(!arrowColor)
         })
         .catch((err) => {
         })
@@ -95,7 +97,7 @@ export default function FeedPage() {
           placeholder="Título da postagem"
           required
         />
-        <InputBody name={"body"}
+        <TextAreaBody name={"body"}
           value={form.body}
           onChange={onChange}
           placeholder="Escreva seu post..."
@@ -103,8 +105,8 @@ export default function FeedPage() {
         />
         <ButtonPost>Postar</ButtonPost>
       </form>
-      <ImgLine src={Line} />
-      <CardFeed posts={posts} like={like} dislike={dislike} />
+      <ImgLine src={Line} alt={"linha colorida"}/>
+      <CardFeed posts={posts} like={like} dislike={dislike} arrowColor={arrowColor}/>
     </div>
 
   )

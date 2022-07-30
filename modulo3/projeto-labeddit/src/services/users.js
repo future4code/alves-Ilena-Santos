@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {BASE_URL} from "../constants/urls"
 import { goToFeed } from '../routes/cordinator'
+import { toast } from 'react-toastify'
 
 
 export const login = (body,cleanFields,navigate, setIsLoading)=>{
@@ -15,7 +16,7 @@ export const login = (body,cleanFields,navigate, setIsLoading)=>{
     })
     .catch((err)=>{
       setIsLoading(false)
-      alert("Erro ao fazer login, verifique se as informações estão corretas")
+      toast.error("Erro ao fazer login, verifique se as informações estão corretas")
     })
   }
 
@@ -28,6 +29,6 @@ export const login = (body,cleanFields,navigate, setIsLoading)=>{
 
     })
     .catch((err)=>{
-      alert("Erro ao cadastrar, verifique se as informações estão corretas")
+      toast.error("Erro ao cadastrar, verifique se as informações estão corretas")
     })
   }

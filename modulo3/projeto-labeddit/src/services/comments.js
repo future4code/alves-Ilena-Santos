@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {BASE_URL} from "../constants/urls"
+import { toast } from 'react-toastify'
 
 export const addComment = (body,cleanFields,id,refresh, setRefresh)=>{
     axios.post(`${BASE_URL}/posts/${id}/comments`,body,{
@@ -12,6 +13,6 @@ export const addComment = (body,cleanFields,id,refresh, setRefresh)=>{
       setRefresh(!refresh)
     })
     .catch((err)=>{
-      alert("Erro ao adicionar comentário :(")
+      toast.error("Erro ao adicionar comentário :(")
     })
   }

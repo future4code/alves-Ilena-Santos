@@ -17,7 +17,7 @@ width: 9.375rem;
 height: 9.375rem;
 padding-left: 5rem;
 `
-export const InputBody = styled.input`
+export const TextAreaBody = styled.textarea`
 height: 8.125rem;
 margin-top: 1.563rem;
 margin-left: 1.875rem;
@@ -26,6 +26,8 @@ width: 82%;
 border: none;
 font-family: 'IBM Plex Sans', sans-serif;
 font-style: normal;
+font-size: 1.1rem;
+padding-left: 0.8rem;
 background: #EDEDED;
 border-radius: 0.75rem;
 `
@@ -38,6 +40,7 @@ border: none;
 color: #FFFFFF;
 font-family: 'Noto Sans';
 font-style: normal;
+font-size: 1.1rem;
 background: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%), #4088CB;
 border-radius: 0.75rem;
 `

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 
 export default function useRequestData(inicialData, url, refresh, setIsLoading) {
@@ -14,10 +15,9 @@ export default function useRequestData(inicialData, url, refresh, setIsLoading) 
         })
             .then((res) => {
                 setData(res.data)
-                setIsLoading(false)
             }).catch((err) => {
                 setIsLoading(false)
-                alert("Erro no carregamento da página :(")
+                toast.error("Erro no carregamento da página :(")
 
             })
     }, [url, refresh])

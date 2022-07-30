@@ -12,9 +12,9 @@ export default function Router() {
     <BrowserRouter>
         <Header/>
         <Routes>
-            <Route index exact path ="/" element={<FeedPage/>}/>
-            <Route path ="/login" element={<LoginPage/>}/>
+            <Route index exact path ="/" element={<LoginPage/>}/>
             <Route path ="/cadastro" element={<SignUpPage/>}/>
+            <Route path ="/feed" element={<FeedPage/>}/>
             <Route path ="/feed/:number" element={<FeedPage/>}/>
             <Route path ="/posts/:id" element={<PostPage/>}/>
             <Route path ="*" element={<ErrorPage/>}/>
