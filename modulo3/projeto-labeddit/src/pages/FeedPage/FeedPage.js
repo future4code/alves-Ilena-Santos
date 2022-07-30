@@ -17,7 +17,7 @@ export default function FeedPage() {
   const [dislikePost, setDislikePost] = useState(false)
   const [arrowColor, setArrowColor] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const posts = useRequestData([], `${BASE_URL}/posts?size=500`, refresh, setIsLoading)
+  const posts = useRequestData([], `${BASE_URL}/posts?size=40`, refresh, setIsLoading)
 
   const { form, onChange, cleanFields } = useForm({ title: "", body: "" })
 
