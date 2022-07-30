@@ -21,7 +21,7 @@ export const TextBody = styled.p`
 font-family: 'IBM Plex Sans', sans-serif;
 font-style: normal;
 font-weight: 400;
-font-size: 1rem;
+font-size: 1.125rem;
 line-height: 1rem;
 color: #000000;
 padding-left: 1.125rem ;

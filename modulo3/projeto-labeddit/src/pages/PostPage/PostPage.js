@@ -21,7 +21,7 @@ export default function PostPage() {
   const params = useParams()
   const [refresh, setRefresh] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const posts = useRequestData([], `${BASE_URL}/posts?size=40`, refresh, setIsLoading)
+  const posts = useRequestData([], `${BASE_URL}/posts?size=100`, refresh, setIsLoading)
   const postInfo = useRequestData([], `${BASE_URL}/posts/${params.id}/comments`, refresh, setIsLoading)
   const { form, onChange, cleanFields } = useForm({ body: "" })
 

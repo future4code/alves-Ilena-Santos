@@ -15,6 +15,7 @@ export default function useRequestData(inicialData, url, refresh, setIsLoading) 
         })
             .then((res) => {
                 setData(res.data)
+                setIsLoading(false)
             }).catch((err) => {
                 setIsLoading(false)
                 toast.error("Erro no carregamento da página :(")
