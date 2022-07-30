@@ -30,6 +30,7 @@ border: none;
 color: #FFFFFF;
 font-family: 'Noto Sans';
 font-style: normal;
+font-size: 1.125rem;
 }
 `
 
