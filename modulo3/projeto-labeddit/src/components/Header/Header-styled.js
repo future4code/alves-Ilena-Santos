@@ -19,7 +19,7 @@ button{
     position: absolute;
 width: 3.438rem;
 height:1.563rem;
-left: 18.75rem;
+left: 18rem;
 top: 0.625rem;
 background: none;
 border: none;

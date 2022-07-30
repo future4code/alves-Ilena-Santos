@@ -22,7 +22,7 @@ position: absolute;
 width: 9.5rem;
 height: 8.875rem;
 left: 7.3rem;
-top:5rem;
+top:4rem;
 `
 
 export const InputName = styled.input`
