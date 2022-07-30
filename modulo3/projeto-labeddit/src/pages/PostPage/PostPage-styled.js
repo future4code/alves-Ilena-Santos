@@ -22,7 +22,7 @@ height: 8.125rem;
 margin-top: 1.563rem;
 margin-left: 1.875rem;
 margin-right:1.875rem;
-width: 82%;
+width: 79%;
 border: none;
 font-family: 'IBM Plex Sans', sans-serif;
 font-style: normal;
