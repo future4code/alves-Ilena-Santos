@@ -1,0 +1,16 @@
+{
+  "name": "aprofundamento-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-1": "tsc && node ./build/exercicio1.js",
+    "start-2": "tsc && node ./build/exercicio2.js",
+    "start-3": "tsc && node ./build/exercicio3.js",
+    "start-4": "tsc && node ./build/exercicio4.js",
+    "start-5": "tsc && node ./build/exercicio5.js"
+  },
+  "keywords": [],
+  "author": "Ilena Acioli",
+  "license": "ISC"
+}
