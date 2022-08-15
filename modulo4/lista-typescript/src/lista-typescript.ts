@@ -33,7 +33,7 @@ type Movie = {
 }
 
 const movieInformation = (movie: Movie) => {
-    console.log(movie)
+    return movie
 }
 
 console.log(movieInformation({ name: "Harry potter", year: 2001, genre: GENERO.ACAO, score: 10 }))
@@ -131,6 +131,40 @@ const negativeBalance = (clients: Client[]) => {
 console.log(negativeBalance(clients))
 
 // Exercicio 7
+type Products = {
+    nome: string, 
+    quantidade: number, 
+    valorUnitario:number | string
+}
+
+const products: Products[] = [
+	{ nome: "MacMugffin", quantidade: 37, valorUnitario: 51.040},
+	{ nome: "Vassoura voadora", quantidade: 56, valorUnitario: 210.0},
+	{ nome: "Laço da verdade", quantidade: 32, valorUnitario: 571.5},
+	{ nome: "O precioso", quantidade: 1, valorUnitario: 9181.923},
+	{ nome: "Caneta de 250 cores", quantidade: 123, valorUnitario: 17},
+	{ nome: "Plumbus", quantidade: 13, valorUnitario: 140.44},
+	{ nome: "Pokebola", quantidade: 200, valorUnitario: 99.9915}
+]
+
+const ajustaPreco = (preco :number): string => {
+	const valorAjustado: string = preco.toFixed(2).replace('.', ',')
+	return "R$ "+valorAjustado
+}
+
+const newInventory = (products:Products[]) =>{
+
+    products.sort(function(x,y){
+        let a = x.quantidade
+        let b = y.quantidade
+        return a - b
+    }).map((product)=>{
+        product.valorUnitario = ajustaPreco(product.valorUnitario as number)
+    })
+    return products
+}
+
+console.log(newInventory(products))
 
 // Exercicio 8
 function checaRenovacaoRG(anoAtual: number, anoNascimento: number, anoEmissao: number): boolean | string {
@@ -168,52 +202,104 @@ console.log(anagram("mesa"))
 
 // Exercicio 10
 
-const teste = (numero: string) => {
-    let primeiraParte = numero.split("-")
-    const teste2 = primeiraParte[0].split("")
-    let contador = 10
-    let soma = 0
+const checkCPF = (cpf: string) => {
+    let firstPart = cpf.split("-")[0].replace(/\./g, "")
+    let secondPart = cpf.split("-")[1]
+    const nineNumbers = firstPart.split("")
+    let quantifier1 = 10
+    let sum1 = 0
 
-    teste2.map((numero) => {
-        soma = Number(numero) * contador + soma
-        contador = contador - 1
+    nineNumbers.map((numero) => {
+        sum1 = Number(numero) * quantifier1 + sum1
+        quantifier1 = quantifier1 - 1
     })
 
-    let primeiroDigito1 = 11 - (soma % 11)
+    let firstDigit = 11 - (sum1 % 11)
+    let numberToCheck: string = ""
 
-
-    let novoNumero: string = ""
-
-    if (primeiroDigito1 >= 10) {
-        const primeiroDigito = 0
-        novoNumero = numero + String(primeiroDigito)
+    if (firstDigit >= 10) {
+        const realFirstDigit = 0
+        numberToCheck = firstPart + String(realFirstDigit)
 
     } else {
-        const primeiroDigito = primeiroDigito1
-        novoNumero = numero + String(primeiroDigito)
+        const realFirstDigit = firstDigit
+        numberToCheck = firstPart + String(realFirstDigit)
     }
   
-    const teste3 = novoNumero.split("")
-    let contador2 = 11
-    let soma2 = 0
+    const tenNumbers = numberToCheck.split("")
+    let quantifier2 = 11
+    let sum2 = 0
 
-    teste3.map((numero) => {
-        soma2 = Number(numero) * contador2 + soma2
-        contador2 = contador2 - 1
+    tenNumbers.map((numero) => {
+        sum2 = Number(numero) * quantifier2 + sum2
+        quantifier2 = quantifier2 - 1
     })
 
-    let segundoDigito1 = 11 - (soma2 % 11)
-    let novoNumero2: string = ""
+    let secondDigit = 11 - (sum2 % 11)
 
-    if (segundoDigito1 >= 10) {
-        const segundoDigito = 0
-        novoNumero2 = novoNumero + String(segundoDigito)
-
+    if (secondDigit >= 10) {
+        const realSecondDigit = 0
+        numberToCheck = numberToCheck + String(realSecondDigit)
     } else {
-        const segundoDigito = segundoDigito1
-        novoNumero2 = novoNumero + String(segundoDigito)
+        const realSecondDigit = secondDigit
+        numberToCheck = numberToCheck + String(realSecondDigit)
     }
-    return teste2
+
+    const elevenNumbers = firstPart + secondPart
+ 
+    if (typeof cpf !== "string") {
+        return ("CPF inválido!")
+    } else if (elevenNumbers === "00000000000" || elevenNumbers == "00000000000" ||
+    elevenNumbers == "11111111111" ||
+    elevenNumbers == "22222222222" ||
+    elevenNumbers == "33333333333" ||
+    elevenNumbers == "44444444444" ||
+    elevenNumbers == "55555555555" ||
+    elevenNumbers == "66666666666" ||
+    elevenNumbers == "77777777777" ||
+    elevenNumbers == "88888888888" ||
+    elevenNumbers == "99999999999"
+    ) {
+        return("CPF inválido!")
+    }
+    else if( numberToCheck === elevenNumbers ) {
+        return ("CPF válido!")
+    } 
+
 }
 
-console.log(teste("145382206-20"))
+console.log(checkCPF("145.382.206-20"))
+
+// Exercicio 11
+
+const convertNumbers = (number:number ) => {
+    let newNumber:string = ""
+    let rest: number = number 
+    const array = [
+        {letra: "M", valor: 1000},
+        {letra: "CM", valor: 900},
+        {letra: "D", valor: 500},
+        {letra: "CD", valor: 400},
+        {letra: "C", valor: 100},
+        {letra: "XC", valor: 90},
+        {letra: "L", valor: 50},
+        {letra: "XL", valor: 40},
+        {letra: "X", valor: 10},
+        {letra: "IX", valor: 9},
+        {letra: "V", valor: 5},
+        {letra: "IV", valor: 4},
+        {letra: "I", valor: 1}
+    ]
+
+        array.map((item)=>{
+            if (rest >= item.valor
+            ) {
+                rest = rest - item.valor
+                newNumber = newNumber + item.letra
+            } 
+        })
+
+        return newNumber 
+}
+
+console.log(convertNumbers(1990))
