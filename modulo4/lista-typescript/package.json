@@ -1,0 +1,11 @@
+{
+  "name": "lista-typescript",
+  "version": "1.0.0",
+  "description": "exercicios do projeto",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node ./build/lista-typescript.js"
+  },
+  "author": "Ilena Acioli",
+  "license": "ISC"
+}
