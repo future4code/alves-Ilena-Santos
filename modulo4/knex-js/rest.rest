@@ -1,0 +1,43 @@
+GET http://localhost:3003/actor/Fulano
+
+###
+GET http://localhost:3003/actor
+
+###
+PUT http://localhost:3003/actor/001
+Content-Type: application/json
+
+{ 
+    "salary": 456456
+}
+
+###
+DELETE http://localhost:3003/actor/003
+
+###
+GET http://localhost:3003/actor
+Content-Type: application/json
+
+{ 
+    "gender": "female"
+}
+
+###
+GET http://localhost:3003/actor/001
+
+
+###
+GET http://localhost:3003/actor?gender=female
+
+
+###
+POST http://localhost:3003/actor
+Content-Type: application/json
+
+{ 
+    "id": "007",
+     "name": "Ana",
+    "salary": 107689,
+    "birthDate": "1990-08-08",
+    "gender": "female"
+}
