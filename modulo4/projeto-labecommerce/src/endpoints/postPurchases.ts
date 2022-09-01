@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import insertPurchases from "../data/insertPurchases";
 import selectProductsById from "../data/selectProductById";
+import selectUserById from "../data/selectUserById";
 
 
 export default async function postPurchases(
@@ -18,6 +19,18 @@ export default async function postPurchases(
       }
 
       const product = await selectProductsById(product_id)
+
+      if (!product){
+         res.statusCode = 404
+         throw new Error("Produto não encontrado!")
+      }
+
+      const user = await selectUserById(user_id)
+
+      if(user.length === 0) {
+         res.statusCode = 404
+         throw new Error("Usuário não encontrado!")
+      }
 
       const total_price = product.price * quantity
 

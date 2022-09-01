@@ -17,26 +17,12 @@ export default async function getUsers(
 
                 user.purchases = purchases
 
-                if (purchases.length === 0) {
-                    user.purchases = []
-                }
             } catch (error) {
                 user.purchases = []
             }
         }
 
         res.send(result)
-
-
-        // const teste = result.map((user)=>{
-        //     // const teste2 = await selectPurchasesById(user.id)
-        //     return user.id
-        // })
-
-        // const teste2 = teste.forEach(selectPurchasesById(item:String) )
-
-        // res.send(result)
-
 
 
     } catch (error: any) {
