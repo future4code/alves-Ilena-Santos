@@ -9,16 +9,16 @@ export default async function postPurchases(
 ): Promise<void> {
    try {
       const { user_id, product_id, quantity } = req.body
-      
+
       const id: string = Date.now().toString()
 
-      if (!user_id || !product_id  || !quantity) {
+      if (!user_id || !product_id || !quantity) {
          res.statusCode = 400
          throw new Error("'user_id', 'product_id' e 'quantidade' são obrigatórios")
       }
 
       const product = await selectProductsById(product_id)
-     
+
       const total_price = product.price * quantity
 
       await insertPurchases(id, user_id, product_id, quantity, total_price)
@@ -27,7 +27,7 @@ export default async function postPurchases(
       res.send("Compra registrada!")
 
    } catch (error: any) {
-      
-         res.status(res.statusCode || 500).send(error.message || error.sqlMessage )
-}
+
+      res.status(res.statusCode || 500).send(error.message || error.sqlMessage)
+   }
 }

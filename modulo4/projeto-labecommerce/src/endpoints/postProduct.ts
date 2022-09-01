@@ -11,15 +11,15 @@ export default async function postProduct(
       const price = req.body.price
       const id: string = Date.now().toString()
 
-      if (!name || !price  || !image_url) {
+      if (!name || !price || !image_url) {
          res.statusCode = 400
          throw new Error("'nome', 'preço' e 'url' são obrigatórios")
       }
 
-      if(typeof price !== "number"){
+      if (typeof price !== "number") {
          throw new Error("preço inválido")
       }
-   
+
       await insertProduct(id, name, price, image_url)
 
 
@@ -27,7 +27,6 @@ export default async function postProduct(
 
    } catch (error: any) {
 
-         console.log(error.message || error.sqlMessage );
-         res.status(res.statusCode || 500).send(error.message || error.sqlMessage )
-}
+      res.status(res.statusCode || 500).send(error.message || error.sqlMessage)
+   }
 }

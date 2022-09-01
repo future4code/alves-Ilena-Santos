@@ -2,8 +2,8 @@ POST http://localhost:3003/users
 Content-Type: application/json
 
 {
-    "name": "fulano",
-    "email": "fulano@",
+    "name": "joão",
+    "email": "joão@",
     "password": "123456"
 }
 
@@ -15,13 +15,13 @@ POST http://localhost:3003/products
 Content-Type: application/json
 
 {
-    "name": "camiseta",
-    "price": 50,
+    "name": "meia",
+    "price": 20,
     "image_url": "https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ"
 }
 
 ###
-GET http://localhost:3003/products
+GET http://localhost:3003/products?order=DESC
 
 
 ###
@@ -29,9 +29,9 @@ POST  http://localhost:3003/purchases
 Content-Type: application/json
 
 {
-    "user_id": "1661974877490",
-    "product_id": "1661973458994",
-    "quantity" : 3
+    "user_id": "1662040589533",
+    "product_id": "1662032163873",
+    "quantity" : 1
 }
 
 ###

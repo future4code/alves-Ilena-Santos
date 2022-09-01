@@ -6,14 +6,19 @@ export default async function getProducts(
     res: Response
 ): Promise<void> {
     try {
+        let order = req.query.order as string
+        const search = req.query.search as string || ""
 
-        const result = await selectProducts()
+        if (!order) {
+            order = "ASC"
+        }
+
+        const result = await selectProducts(order, search)
 
         res.send(result)
 
     } catch (error: any) {
 
-        console.log(error.message || error.sqlMessage);
         res.status(res.statusCode || 500).send(error.message || error.sqlMessage)
     }
 }
