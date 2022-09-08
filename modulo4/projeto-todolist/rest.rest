@@ -1,0 +1,33 @@
+POST  http://localhost:3003/user
+Content-Type: application/json
+
+{ 
+    "name": "joão",
+    "nickname":"jota",
+    "email": "joao@"
+}
+###
+GET  http://localhost:3003/user/1
+
+###
+PUT  http://localhost:3003/user/edit/11
+Content-Type: application/json
+
+{ 
+    "nickname":"jota",
+    "email": "joao@teste3"
+}
+
+###
+POST  http://localhost:3003/task
+Content-Type: application/json
+
+{ 
+    "title": "isso é um titulo 2",
+    "description":"isso é uma descrição 2",
+    "limitDate": "26/03/2022",
+    "creatorUserId": 11
+}
+
+###
+GET  http://localhost:3003/task/1
