@@ -1,0 +1,14 @@
+
+GET  http://localhost:3003/users
+
+###
+GET  http://localhost:3003/users/teac
+
+###
+GET  http://localhost:3003/users?orderBy=type&order=DESC
+
+###
+GET  http://localhost:3003/users?page=1
+
+###
+GET  http://localhost:3003/users?page=1&orderBy=type&order=ASC&filter=h&filterBy=name
