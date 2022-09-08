@@ -1,0 +1,9 @@
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "nome": "bot",
+    "cep": "68900065",
+    "numero": "234",
+    "complemento": "casa"
+}
