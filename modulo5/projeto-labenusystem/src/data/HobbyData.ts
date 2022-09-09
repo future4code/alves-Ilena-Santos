@@ -24,6 +24,17 @@ class HobbyData extends BaseDataBase{
         return result
     }
 
+    async insertStudentHobby(studentId:string, hobbyId:string ): Promise<void> {
+        const id = Date.now().toString()
+        await this.getConnetion()
+            .insert({
+                id: id,
+                student_id: studentId,
+                hobby_id: hobbyId
+               
+            })
+            .into("labenusystem_student_hobby")
+    }
 
 }
 

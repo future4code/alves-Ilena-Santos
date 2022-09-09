@@ -12,6 +12,7 @@ class ClassController {
 
 
             if ( !className || !module) {
+                res.statusCode = 400
                 throw new Error("O nome da turma e o módulo devem ser passados!")
             }
 
@@ -23,7 +24,7 @@ class ClassController {
 
             res.status(201).send({ message: "Classe inserida!" })
         } catch (error: any) {
-            res.status(500).send({ message: error.message })
+            res.status(res.statusCode || 500).send(error.message || error.sqlMessage)
         }
     }
 
@@ -41,7 +42,7 @@ class ClassController {
             res.status(200).send(allClasses)
 
         } catch (error: any) {
-            res.status(500).send({ message: error.message })
+            res.status(res.statusCode || 500).send(error.message || error.sqlMessage)
         }
     }
 
@@ -54,13 +55,14 @@ class ClassController {
             const allClasses = await classData.selectClassesById(classId)
 
             if(!allClasses.length){
+                res.statusCode = 404
                 throw new Error("Não há nenhuma turma com esse id!")
             }
 
             res.status(200).send(allClasses)
 
         } catch (error: any) {
-            res.status(500).send({ message: error.message })
+            res.status(res.statusCode || 500).send(error.message || error.sqlMessage)
         }
     }
 
@@ -70,6 +72,7 @@ class ClassController {
             const { classId, module } = req.body
 
             if ( !classId || !module) {
+                res.statusCode = 400
                 throw new Error("O id da turma e o módulo devem ser informados!")
             }
 
@@ -82,7 +85,7 @@ class ClassController {
             res.status(200).send({ message: "Módulo atualizado!" })
 
         } catch (error: any) {
-            res.status(500).send({ message: error.message })
+            res.status(res.statusCode || 500).send(error.message || error.sqlMessage)
         }
     }
 
