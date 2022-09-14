@@ -7,9 +7,10 @@ export class RecipeDatabase extends BaseDatabase {
 
         await this.getConnection().insert({
             id: recipe.getId(), 
-            description: recipe.getDescription(),
             title: recipe.getTitle(),
-            date: recipe.getDate()
+            description: recipe.getDescription(),
+            date: recipe.getDate(),
+            creator: recipe.getCreator()
         }).into("cookenu_recipes")
     }
 
@@ -20,6 +21,16 @@ export class RecipeDatabase extends BaseDatabase {
             .where({ id })
 
         return result[0]
+    }
+
+    public async selectFollowingRecipes(followingId:string){
+        const result = await this.getConnection()
+        .select("cookenu_recipes.id","title", "description", "date", "creator", "cookenu_users.name")
+        .from("cookenu_recipes")
+        .where({ creator: followingId })
+        .join("cookenu_users", "cookenu_recipes.creator", "cookenu_users.id")
+        
+    return result
     }
 
 

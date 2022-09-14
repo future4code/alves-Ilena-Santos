@@ -1,9 +1,10 @@
 export default class Recipe {
     constructor(
         private id: string,
-        private description: string,
         private title: string,
-        private date: string
+        private description: string,
+        private date: string,
+        private creator: string
     ){}
 
     public getId(){
@@ -17,5 +18,8 @@ export default class Recipe {
     }
     public getDate(){
         return this.date
+    }
+    public getCreator(){
+        return this.creator
     }
 }

@@ -15,7 +15,9 @@ export class UserDatabase extends BaseDatabase {
             role: user.getRole()
         }
 
-        await this.getConnection().insert(userDB).into("cookenu_users")
+        await this.getConnection()
+        .insert(userDB)
+        .into("cookenu_users")
     }
 
 
@@ -38,5 +40,33 @@ export class UserDatabase extends BaseDatabase {
         return result[0]
     }
 
+    public async insertFollowing(id: string, profileId:string, userToFollowId: string) {
+        await this.getConnection()
+        .insert({
+            id: id,
+            profile: profileId,
+            follow: userToFollowId
+        }).into("cookenu_follow")
+    }
+
+    public async selectFollowing(profileId:string){
+        const result = await this.getConnection()
+        .select("follow")
+        .from("cookenu_follow")
+        .where({
+            profile: profileId
+        })
+        
+        return result
+    }
+
+    public async removeFollow( profileId:string, userToUnFollowId: string) {
+        await this.getConnection()
+        .delete("*")
+        .where({
+            profile: profileId,
+            follow: userToUnFollowId
+        }).from("cookenu_follow")
+    }
   
 }

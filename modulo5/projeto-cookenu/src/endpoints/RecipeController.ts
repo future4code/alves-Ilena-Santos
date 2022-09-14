@@ -32,7 +32,7 @@ class RecipeController {
 
             const date = new Date().toLocaleDateString()
 
-            const recipe = new Recipe(id, description, title, date.split("/").reverse().join("/"))
+            const recipe = new Recipe(id, title, description, date.split("/").reverse().join("/"), payload.id)
 
             const recipeDataBase = new RecipeDatabase()
             await recipeDataBase.createRecipe(recipe)
@@ -64,7 +64,6 @@ class RecipeController {
             if (payload.role !== USER_ROLES.NORMAL) {
                 throw new Error("Autorização insuficiente")
             }
-
 
             const recipeDataBase = new RecipeDatabase()
             const recipe = await recipeDataBase.selectRecipeById(id)

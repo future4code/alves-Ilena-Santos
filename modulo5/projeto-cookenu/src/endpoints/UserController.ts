@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { RecipeDatabase } from "../data/RecipeDataBase";
 import { UserDatabase } from "../data/UserDatabase";
 import { EmailExist } from "../error/EmailExist";
 import { InvalidCredencial } from "../error/InvalidCredencial";
@@ -11,18 +12,22 @@ import { USER_ROLES } from "../types";
 
 class UserController {
 
-    public async createUser(req: Request, res: Response) {
+    async createUser(req: Request, res: Response) {
         try {
-            const { name, email, password } = req.body
-
-            const role = USER_ROLES.NORMAL
+            const { name, email, password, role } = req.body
+            
+            if(role !==USER_ROLES.ADMIN || role !==USER_ROLES.NORMAL){
+                res.statusCode = 404
+                throw new Error("Tipo de usuário inválido")
+            }
+            
 
             if (!name || !email || !password) {
                 throw new MissingFields()
             }
 
-            if(password.length < 6 ) {
-                throw new Error("Senha inválida");
+            if (password.length < 6) {
+                throw new Error("Senha inválida")
             }
 
             const userDataBase = new UserDatabase()
@@ -98,6 +103,7 @@ class UserController {
         try {
             const token = req.headers.authorization as string
 
+
             if (!token) {
                 throw new InvalidCredencial();
             }
@@ -149,6 +155,142 @@ class UserController {
         }
     }
 
+    async followProfile(req: Request, res: Response) {
+        try {
+            const token = req.headers.authorization as string
+            const userToFollowId = req.body.userToFollowId as string
+            const id = new GenerateId().createId();
+
+            if (!userToFollowId) {
+                throw new MissingFields()
+            }
+
+            if (!token) {
+                throw new InvalidCredencial();
+            }
+
+            const authenticator = new Authenticator()
+            const payload = authenticator.verifyToken(token)
+
+            if (payload.role !== USER_ROLES.NORMAL) {
+                throw new Error("Autorização insuficiente")
+            }
+
+            const userData = new UserDatabase()
+
+            const userDB = await userData.getUserById(userToFollowId)
+
+            if (!userDB) {
+                throw new Error("O perfil que você deseja seguir não foi encontrado")
+            }
+
+            await userData.insertFollowing(id, payload.id, userToFollowId)
+
+            res.status(200).send({ message: "seguido com sucesso" })
+
+        } catch (error: any) {
+            res.status(error.statusCode || 500).send({ message: error.message })
+        }
+    }
+
+    async unfollowProfile(req: Request, res: Response) {
+        try {
+            const token = req.headers.authorization as string
+            const userToUnFollowId = req.body.userToFollowId as string
+
+            if (!userToUnFollowId) {
+                throw new MissingFields()
+            }
+
+            if (!token) {
+                throw new InvalidCredencial();
+            }
+
+            const authenticator = new Authenticator()
+            const payload = authenticator.verifyToken(token)
+
+            if (payload.role !== USER_ROLES.NORMAL) {
+                throw new Error("Autorização insuficiente")
+            }
+
+            const userData = new UserDatabase()
+            const userDB = await userData.getUserById(userToUnFollowId)
+
+            if (!userDB) {
+                throw new Error("O perfil que você deseja parar de seguir não foi encontrado")
+            }
+
+            const following = await userData.selectFollowing(payload.id)
+
+            const checkFollow = following.find(follow => follow.follow === userToUnFollowId)
+
+            if (!checkFollow) {
+                throw new Error("Você não segue o perfil selecionado")
+            }
+
+            await userData.removeFollow(payload.id, userToUnFollowId)
+
+            res.status(200).send({ message: "Perfil removido dos seus seguidores" })
+
+        } catch (error: any) {
+            res.status(error.statusCode || 500).send({ message: error.message })
+        }
+    }
+
+    async getRecipes(req: Request, res: Response) {
+        try {
+            const token = req.headers.authorization as string
+
+            if (!token) {
+                throw new InvalidCredencial();
+            }
+
+            const authenticator = new Authenticator()
+            const payload = authenticator.verifyToken(token)
+
+            if (payload.role !== USER_ROLES.NORMAL) {
+                throw new Error("Autorização insuficiente")
+            }
+
+            const userData = new UserDatabase()
+            const following = await userData.selectFollowing(payload.id)
+
+            console.log(following)
+
+            let usersRecipes:any = []
+
+            for (const user of following) {
+                try {
+                    const recipeDataBase = new RecipeDatabase()
+                    const recipes = await recipeDataBase.selectFollowingRecipes(user.follow)
+
+                    if (recipes.length > 0) {
+                        usersRecipes = [...usersRecipes, ...recipes]
+                    }
+
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+
+            const editedUsersRecipes = usersRecipes.map((recipe:any) => {
+                const newObject = {
+                    id: recipe.id,
+                    title: recipe.title,
+                    description: recipe.description,
+                    createdAt: new Date(recipe.date).toLocaleDateString(),
+                    userId: recipe.creator,
+                    userName: recipe.name
+                }
+                return newObject
+            })
+
+            res.status(200).send({ recipes: editedUsersRecipes })
+
+        } catch (error: any) {
+            res.status(error.statusCode || 500).send({ message: error.message })
+        }
+    }
 }
 
 export default UserController
