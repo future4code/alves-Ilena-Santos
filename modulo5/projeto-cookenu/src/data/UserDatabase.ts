@@ -68,5 +68,29 @@ export class UserDatabase extends BaseDatabase {
             follow: userToUnFollowId
         }).from("cookenu_follow")
     }
-  
+
+    public async removeAccount(userId:string){
+        await this.getConnection()
+        .delete("*")
+        .where({
+            profile: userId
+        })
+        .orWhere({
+            follow: userId
+        })
+        .from("cookenu_follow") 
+        
+        await this.getConnection()
+        .delete("*")
+        .where({
+            creator: userId,
+        }).from("cookenu_recipes")
+
+        await this.getConnection()
+        .delete("*")
+        .where({
+            id: userId,
+        }).from("cookenu_users")
+    }
+
 }

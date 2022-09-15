@@ -33,5 +33,22 @@ export class RecipeDatabase extends BaseDatabase {
     return result
     }
 
+    public async editRecipe(recipeId:string, newTitle: string, newDescription: string) {
+         await this.getConnection()
+            .from("cookenu_recipes")
+            .update({
+                title: newTitle,
+                description: newDescription
+            })
+            .where({ id: recipeId })
+    }
+
+    public async deleteRecipe(recipeId:string) {
+        await this.getConnection()
+           .from("cookenu_recipes")
+           .delete()
+           .where({ id: recipeId })
+   }
+
 
 }

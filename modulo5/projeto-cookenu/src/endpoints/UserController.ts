@@ -14,24 +14,28 @@ class UserController {
 
     async createUser(req: Request, res: Response) {
         try {
-            const { name, email, password, role } = req.body
-            
-            if(role !==USER_ROLES.ADMIN || role !==USER_ROLES.NORMAL){
-                res.statusCode = 404
+            const { name, email, password } = req.body
+            let role = req.body.role
+
+            if (!role) {
+                role = USER_ROLES.NORMAL
+            }
+
+            if (role !== USER_ROLES.ADMIN && role !== USER_ROLES.NORMAL) {
+                res.statusCode = 400
                 throw new Error("Tipo de usuário inválido")
             }
-            
 
             if (!name || !email || !password) {
                 throw new MissingFields()
             }
 
             if (password.length < 6) {
+                res.statusCode = 400
                 throw new Error("Senha inválida")
             }
 
             const userDataBase = new UserDatabase()
-
             const userDB = await userDataBase.getUserByEmail(email)
 
             if (userDB) {
@@ -71,7 +75,6 @@ class UserController {
             }
 
             const userData = new UserDatabase()
-
             const userDB = await userData.getUserByEmail(email)
 
             if (!userDB) {
@@ -103,17 +106,12 @@ class UserController {
         try {
             const token = req.headers.authorization as string
 
-
             if (!token) {
                 throw new InvalidCredencial();
             }
 
             const authenticator = new Authenticator()
             const payload = authenticator.verifyToken(token)
-
-            if (payload.role !== USER_ROLES.NORMAL) {
-                throw new Error("Autorização insuficiente")
-            }
 
             const userData = new UserDatabase()
             const userDB = await userData.getUserById(payload.id)
@@ -140,10 +138,6 @@ class UserController {
 
             const authenticator = new Authenticator()
             const payload = authenticator.verifyToken(token)
-
-            if (payload.role !== USER_ROLES.NORMAL) {
-                throw new Error("Autorização insuficiente")
-            }
 
             const userData = new UserDatabase()
             const userDB = await userData.getUserById(id)
@@ -172,12 +166,7 @@ class UserController {
             const authenticator = new Authenticator()
             const payload = authenticator.verifyToken(token)
 
-            if (payload.role !== USER_ROLES.NORMAL) {
-                throw new Error("Autorização insuficiente")
-            }
-
             const userData = new UserDatabase()
-
             const userDB = await userData.getUserById(userToFollowId)
 
             if (!userDB) {
@@ -209,14 +198,11 @@ class UserController {
             const authenticator = new Authenticator()
             const payload = authenticator.verifyToken(token)
 
-            if (payload.role !== USER_ROLES.NORMAL) {
-                throw new Error("Autorização insuficiente")
-            }
-
             const userData = new UserDatabase()
             const userDB = await userData.getUserById(userToUnFollowId)
 
             if (!userDB) {
+                res.statusCode = 404
                 throw new Error("O perfil que você deseja parar de seguir não foi encontrado")
             }
 
@@ -225,6 +211,7 @@ class UserController {
             const checkFollow = following.find(follow => follow.follow === userToUnFollowId)
 
             if (!checkFollow) {
+                res.statusCode = 404
                 throw new Error("Você não segue o perfil selecionado")
             }
 
@@ -248,16 +235,10 @@ class UserController {
             const authenticator = new Authenticator()
             const payload = authenticator.verifyToken(token)
 
-            if (payload.role !== USER_ROLES.NORMAL) {
-                throw new Error("Autorização insuficiente")
-            }
-
             const userData = new UserDatabase()
             const following = await userData.selectFollowing(payload.id)
 
-            console.log(following)
-
-            let usersRecipes:any = []
+            let usersRecipes: any = []
 
             for (const user of following) {
                 try {
@@ -273,7 +254,7 @@ class UserController {
                 }
             }
 
-            const editedUsersRecipes = usersRecipes.map((recipe:any) => {
+            const editedUsersRecipes = usersRecipes.map((recipe: any) => {
                 const newObject = {
                     id: recipe.id,
                     title: recipe.title,
@@ -289,6 +270,40 @@ class UserController {
 
         } catch (error: any) {
             res.status(error.statusCode || 500).send({ message: error.message })
+        }
+    }
+
+    public async deleteAccount(req: Request, res: Response) {
+        try {
+            const token = req.headers.authorization as string
+            const id = req.body.id
+
+            if (!token) {
+                throw new InvalidCredencial();
+            }
+
+            const authenticator = new Authenticator()
+            const payload = authenticator.verifyToken(token)
+
+            const userData = new UserDatabase()
+            const userDB = await userData.getUserById(id)
+
+            if (!userDB) {
+                res.statusCode = 404
+                throw new Error("O perfil que você deseja deletar não foi encontrado")
+            }
+
+            if (payload.role !== USER_ROLES.ADMIN) {
+                res.statusCode = 401
+                throw new Error("Você não tem autorização para deletar o usuário")
+            }
+
+            await userData.removeAccount(id)
+
+            res.status(200).send({ message: "Conta deletada pelo ADM" })
+
+        } catch (error: any) {
+            res.status(error.statusCode || 500).send(error.message || error.sqlMessage)
         }
     }
 }
