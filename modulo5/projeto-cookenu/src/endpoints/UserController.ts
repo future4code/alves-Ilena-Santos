@@ -185,7 +185,9 @@ class UserController {
     async unfollowProfile(req: Request, res: Response) {
         try {
             const token = req.headers.authorization as string
-            const userToUnFollowId = req.body.userToFollowId as string
+            const userToUnFollowId = req.body.userToUnfollowId as string
+
+            console.log(userToUnFollowId)
 
             if (!userToUnFollowId) {
                 throw new MissingFields()
