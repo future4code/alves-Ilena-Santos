@@ -1,9 +1,13 @@
-// import { Router } from 'express'
-// import { UserController } from '../controller/UserController'
+import { Router } from 'express'
+import { UserController } from '../controller/UserController'
 
-// export const userRouter = Router()
+export const userRouter = Router()
 
-// const userController = new UserController()
 
-// userRouter.post("/users/signup", userController.signup )
-// userRouter.post("/users/login", userController.login)
+const userController = new UserController()
+userRouter.post("/signup", userController.signup )
+userRouter.post("/login", userController.login)
+userRouter.get("/", userController.getUsers)
+userRouter.delete("/:id", userController.deleteUserAccount)
+userRouter.put("/:id", userController.editUser)
+

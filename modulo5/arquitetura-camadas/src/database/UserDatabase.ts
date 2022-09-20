@@ -65,4 +65,15 @@ export class UserDatabase extends BaseDatabase {
         })
     }
 
+    public updateUser = async (id:string, name: string, email: string, password: string) =>{
+        await BaseDatabase.connection(UserDatabase.TABLE_USERS)
+        .update({
+            name,
+            password, 
+            email
+        })
+        .where({
+            id
+        })
+    }
 }

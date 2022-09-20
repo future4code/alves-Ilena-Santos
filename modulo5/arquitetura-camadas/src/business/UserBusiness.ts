@@ -1,12 +1,12 @@
 import { response, Response } from "express"
 import { UserDatabase } from "../database/UserDatabase"
-import { User, USER_ROLES } from "../models/User"
+import { IDeleteInputDTO, IEditUserInputDTO, IGetUsersInputDTO, ILoginInputDTO, ISignupInputDTO, User, USER_ROLES } from "../models/User"
 import { Authenticator, ITokenPayload } from "../services/Authenticator"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 
 export class UserBusiness {
-    public signup = async (input: any) => {
+    public signup = async (input: ISignupInputDTO) => {
         const { name, email, password } = input
 
         if (!name || typeof name !== "string" || name.length < 3) {
@@ -53,7 +53,7 @@ export class UserBusiness {
 
     }
 
-    public login = async (input: any) => {
+    public login = async (input: ILoginInputDTO) => {
         const { email, password } = input
 
         if (!email || typeof email !== "string" || !email.includes('@')) {
@@ -93,7 +93,7 @@ export class UserBusiness {
         return response
     }
 
-    public getUsers = async (input: any) => {
+    public getUsers = async (input: IGetUsersInputDTO) => {
         const { token, search, page } = input
 
         const pageNumber = Number(page)
@@ -120,7 +120,7 @@ export class UserBusiness {
 
     }
 
-    public deleteUserAccount = async (input: any) => {
+    public deleteUserAccount = async (input: IDeleteInputDTO) => {
         const { id, token } = input
 
         if (!token) {
@@ -156,5 +156,54 @@ export class UserBusiness {
         }
 
         return response
+    }
+
+    public editUser = async (input:IEditUserInputDTO ) =>{
+        const {id,token,name,email,password} = input
+
+        if (!name || typeof name !== "string" || name.length < 3) {
+            throw new Error("Parâmetro 'name' inválido")
+        }
+
+        if (!email || typeof email !== "string" || !email.includes('@')) {
+            throw new Error("Parâmetro 'email' inválido")
+        }
+
+        if (!password || typeof password !== "string" || password.length < 6) {
+            throw new Error("Parâmetro 'senha' inválido")
+        }
+
+        if (!token) {
+            throw new Error("Erro de autorização")
+        }
+
+        if (!id) {
+            throw new Error("Informe o id do usuário")
+        }
+
+        const authenticator = new Authenticator()
+        const payload = authenticator.getTokenPayload(token)
+
+        const userData = new UserDatabase()
+        const userDB = await userData.selectUserById(id)
+
+        if (!userDB) {
+            throw new Error("O perfil que você deseja editar não foi encontrado")
+        }
+
+        if (payload.role !== USER_ROLES.ADMIN && payload.id !== id) {
+            throw new Error("Erro de autorização")
+        }
+        const hashManager = new HashManager()
+        const hashPassword = await hashManager.hash(password)
+
+        await userData.updateUser(id, name, email,hashPassword)
+
+        const response = {
+            message: "Usuário editado"
+        }
+
+        return response
+
     }
 }
