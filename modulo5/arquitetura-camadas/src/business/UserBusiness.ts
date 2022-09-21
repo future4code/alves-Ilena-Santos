@@ -6,6 +6,13 @@ import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 
 export class UserBusiness {
+    constructor(
+        private userDatabase: UserDatabase,
+        private idGenerator: IdGenerator,
+        private hashManager: HashManager,
+        private authenticator: Authenticator
+        ) {}
+
     public signup = async (input: ISignupInputDTO) => {
         const { name, email, password } = input
 
@@ -21,11 +28,15 @@ export class UserBusiness {
             throw new Error("Parâmetro 'senha' inválido")
         }
 
-        const idGenerator = new IdGenerator()
-        const id = idGenerator.generate()
+        const userDB = await this.userDatabase.selectUserByEmail(email)
 
-        const hashManager = new HashManager()
-        const hashPassword = await hashManager.hash(password)
+        if (userDB) {
+            throw new Error("Email já cadastrado")
+        }
+
+        const id = this.idGenerator.generate()
+
+        const hashPassword = await this.hashManager.hash(password)
 
         const user = new User(
             id,
@@ -41,8 +52,7 @@ export class UserBusiness {
             role: user.getRole()
         }
 
-        const authenticator = new Authenticator()
-        const token = authenticator.generateToken(payload)
+        const token = this.authenticator.generateToken(payload)
 
         const response = {
             message: "Usuário cadastrado!",
@@ -65,15 +75,13 @@ export class UserBusiness {
         }
 
 
-        const userData = new UserDatabase()
-        const userDB = await userData.selectUserByEmail(email)
+        const userDB = await this.userDatabase.selectUserByEmail(email)
 
         if (!userDB) {
             throw new Error("Usuário não encontrado")
         }
 
-        const hashManager = new HashManager()
-        const isPasswordCorrect = await hashManager.compare(password, userDB.password)
+        const isPasswordCorrect = await this.hashManager.compare(password, userDB.password)
 
         if (!isPasswordCorrect) {
             throw new Error("Erro nas credenciais")
@@ -102,11 +110,9 @@ export class UserBusiness {
             throw new Error("Erro de autorização")
         }
 
-        const authenticator = new Authenticator()
-        const payload = authenticator.getTokenPayload(token)
+        const payload = this.authenticator.getTokenPayload(token)
 
-        const userData = new UserDatabase()
-        const userDB = await userData.selectUserByName(search, pageNumber)
+        const userDB = await this.userDatabase.selectUserByName(search, pageNumber)
 
         if (!userDB) {
             throw new Error("Usuário não encontrado")
@@ -131,11 +137,9 @@ export class UserBusiness {
             throw new Error("Informe o id do usuário")
         }
 
-        const authenticator = new Authenticator()
-        const payload = authenticator.getTokenPayload(token)
+        const payload = this.authenticator.getTokenPayload(token)
 
-        const userData = new UserDatabase()
-        const userDB = await userData.selectUserById(id)
+        const userDB = await this.userDatabase.selectUserById(id)
 
         if (!userDB) {
             throw new Error("O perfil que você deseja deletar não foi encontrado")
@@ -149,7 +153,7 @@ export class UserBusiness {
             throw new Error("Usuário não pode ser deletado")
         }
 
-        await userData.deleteUser(id)
+        await this.userDatabase.deleteUser(id)
 
         const response = {
             message: "Usuário deletado"
@@ -181,11 +185,9 @@ export class UserBusiness {
             throw new Error("Informe o id do usuário")
         }
 
-        const authenticator = new Authenticator()
-        const payload = authenticator.getTokenPayload(token)
+        const payload = this.authenticator.getTokenPayload(token)
 
-        const userData = new UserDatabase()
-        const userDB = await userData.selectUserById(id)
+        const userDB = await this.userDatabase.selectUserById(id)
 
         if (!userDB) {
             throw new Error("O perfil que você deseja editar não foi encontrado")
@@ -197,7 +199,7 @@ export class UserBusiness {
         const hashManager = new HashManager()
         const hashPassword = await hashManager.hash(password)
 
-        await userData.updateUser(id, name, email,hashPassword)
+        await this.userDatabase.updateUser(id, name, email,hashPassword)
 
         const response = {
             message: "Usuário editado"
