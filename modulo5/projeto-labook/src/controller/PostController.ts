@@ -35,6 +35,51 @@ export class PostController {
         }
     }
 
+    public deletePost = async (req: Request, res: Response) =>{
+        try {
+            const input  = {
+                token: req.headers.authorization,
+                postId: req.body.postId
+            }
 
+            const response = await this.postBusiness.deletePost(input)
+
+            res.status(201).send(response)
+        } catch (error:any) {
+            res.status(400).send({ message: error.message })
+        }
+    }
+
+    public likePost = async (req: Request, res: Response) =>{
+        try {
+            const input  = {
+                token: req.headers.authorization,
+                postId: req.body.postId
+            }
+
+            const response = await this.postBusiness.likePost(input)
+
+            res.status(201).send(response)
+        } catch (error:any) {
+            res.status(400).send({ message: error.message })
+        }
+    }
+
+    public dislikePost = async (req: Request, res: Response) =>{
+        try {
+            const input  = {
+                token: req.headers.authorization,
+                postId: req.body.postId
+            }
+
+            const response = await this.postBusiness.dislikePost(input)
+
+            res.status(201).send(response)
+        } catch (error:any) {
+            res.status(400).send({ message: error.message })
+        }
+    }
+
+    
 
 }

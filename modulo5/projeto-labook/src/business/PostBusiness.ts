@@ -1,8 +1,10 @@
 import { likes } from "../database/migrations/data"
 import { PostDatabase } from "../database/PostDatabase"
 import { AuthenticationError } from "../errors/AuthenticationError"
+import { NotFoundError } from "../errors/NotFoundError"
 import { ParamsError } from "../errors/ParamsError"
-import { Post } from "../models/Post"
+import { ILikeDB, Post } from "../models/Post"
+import { USER_ROLES } from "../models/User"
 import { Authenticator } from "../services/Authenticator"
 import { IdGenerator } from "../services/IdGenerator"
 
@@ -89,4 +91,141 @@ export class PostBusiness {
 
         return response
     }
+
+
+    public deletePost = async (input:any) => {
+        const { token, postId } = input
+
+        if(!postId) {
+            throw new ParamsError()
+        }
+
+        if (!token) {
+            throw new AuthenticationError();
+        }
+
+        const payload = this.authenticator.getTokenPayload(token)
+
+        if(!payload) {
+            throw new AuthenticationError();
+        }
+
+        const post = await this.postDatabase.selectPostById(postId)
+
+        if (!post) {
+            throw new NotFoundError()
+        }
+
+        let response = {}
+
+        if (payload.role === USER_ROLES.ADMIN) {
+            await this.postDatabase.deletePostById(postId)
+            response = {
+                message: "Post deletado!"
+            }
+        }
+
+        else {
+            if(post.user_id !== payload.id) {
+                throw new Error("Post pertence a outro usuário!")
+            }
+
+            await this.postDatabase.deletePostById(postId)
+            response = {
+                message: "Post deletado!"
+            }
+        }
+
+        return response
+    }
+
+
+    public likePost = async (input:any) => {
+        const { token, postId } = input
+
+        if(!postId) {
+            throw new ParamsError()
+        }
+
+        if (!token) {
+            throw new AuthenticationError();
+        }
+
+        const payload = this.authenticator.getTokenPayload(token)
+
+        if(!payload) {
+            throw new AuthenticationError();
+        }
+
+        const post = await this.postDatabase.selectPostById(postId)
+
+        if (!post) {
+            throw new NotFoundError()
+        }
+
+        const alreadyLiked = await this.postDatabase.checkLike(postId, payload.id)
+
+        if(alreadyLiked) {
+            throw new Error("Esse post já foi curtido por você")
+        }
+
+        const id = this.idGenerator.generate()
+
+        const like: ILikeDB = {
+            id: id,
+            post_id: post.id,
+            user_id: payload.id
+
+        }
+
+        await this.postDatabase.giveLike(like)
+
+        const response = {
+            message: "post curtido!"
+        }
+
+        return response
+
+    }
+
+    public dislikePost = async (input:any) => {
+        const { token, postId } = input
+
+        if(!postId) {
+            throw new ParamsError()
+        }
+
+        if (!token) {
+            throw new AuthenticationError();
+        }
+
+        const payload = this.authenticator.getTokenPayload(token)
+
+        if(!payload) {
+            throw new AuthenticationError();
+        }
+
+        const post = await this.postDatabase.selectPostById(postId)
+
+        if (!post) {
+            throw new NotFoundError()
+        }
+
+        const alreadyLiked = await this.postDatabase.checkLike(postId, payload.id)
+
+        if(!alreadyLiked) {
+            throw new Error("Você não curtia esse post")
+        }
+
+
+        await this.postDatabase.removeLike(alreadyLiked.id)
+
+        const response = {
+            message: "like removido!"
+        }
+
+        return response
+
+    }
+
 }
