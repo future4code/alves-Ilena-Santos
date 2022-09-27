@@ -1,0 +1,61 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### 1) Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "Beltrano",
+    "email": "beltrano2@gmail.com",
+    "password": "abc123"
+}
+
+### 2) Login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "beltrano2@gmail.com",
+    "password": "abc123"
+}
+
+### 3) Create Post
+POST http://localhost:3003/posts
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjNjQ0MTBmLWZlYjctNDc2NC04MDcxLTlhMDdmODE4Y2MzZCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjM5NTQzMTcsImV4cCI6MTY2NDA0MDcxN30.miwUzvnQhrwP8OuhtP33huW_jQ8jF4JE6etBAQcNI7o
+Content-Type: application/json
+
+{
+    "content": "teste"
+}
+
+### 4) Get posts 
+GET http://localhost:3003/posts
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjNjQ0MTBmLWZlYjctNDc2NC04MDcxLTlhMDdmODE4Y2MzZCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjM5NTQzMTcsImV4cCI6MTY2NDA0MDcxN30.miwUzvnQhrwP8OuhtP33huW_jQ8jF4JE6etBAQcNI7o
+
+### 5) Delete Post
+DELETE  http://localhost:3003/posts
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2Mzk1NDg4NiwiZXhwIjoxNjY0MDQxMjg2fQ.tQU5j-dweUOcflLWvF_MxQ3OYQcdwlt2xwFuIuxx1f4
+Content-Type: application/json
+
+{
+    "postId": "eca922f2-83df-43e1-be13-491c95c94e73"
+}
+
+### 6) Like post
+POST http://localhost:3003/posts/like
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjNjQ0MTBmLWZlYjctNDc2NC04MDcxLTlhMDdmODE4Y2MzZCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQxMTg1MjIsImV4cCI6MTY2NDIwNDkyMn0.FbMLogRl8zmfCmO0zzgWaFo-Puwfyz_ypS1VKR9poDU
+Content-Type: application/json
+
+{
+    "postId": "201"
+}
+
+### 7) Dislike post
+POST http://localhost:3003/posts/dislike
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjNjQ0MTBmLWZlYjctNDc2NC04MDcxLTlhMDdmODE4Y2MzZCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQxMTg1MjIsImV4cCI6MTY2NDIwNDkyMn0.FbMLogRl8zmfCmO0zzgWaFo-Puwfyz_ypS1VKR9poDU
+Content-Type: application/json
+
+{
+    "postId": "201"
+}
