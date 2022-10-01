@@ -96,20 +96,57 @@ export class ShowBusiness {
             throw new NotFoundError("Show não encontrado")
         }
         
-        const ticketsQuatity = await this.showDatabase.selectTicketsQuantity(showId)
+        const numberOfTicketsReserved = await this.showDatabase.selectReservedTickets(showId)
         
-        if(ticketsQuatity === 5000) {
+        if(numberOfTicketsReserved === 5000) {
             throw new Error("Todos os ingressos para esse show já estão reservados")
         }
         
         const id = this.idGenerator.generate()
         await this.showDatabase.createReservation(id, payload.id, showId)
         
-        const newQuatity = 5000 - ticketsQuatity - 1
+        const newQuatity = 5000 - numberOfTicketsReserved - 1
         await this.showDatabase.updateTicketsQuantity(newQuatity, showId)
 
         const response = {
             message: "Reserva feita com sucesso",
+        }
+
+        return response
+
+    }
+
+
+    public deleteReservation = async (input: any) => {
+        const { token, showId } = input
+
+        const payload = this.authenticator.getTokenPayload(token)
+
+        if(!payload) {
+            throw new AuthenticationError();
+        }
+        
+        const checkIfShowExist = await this.showDatabase.selectShowById(showId)
+        
+        
+        if(!checkIfShowExist){
+            throw new NotFoundError("Show não encontrado")
+        }
+
+        const checkReservation = await this.showDatabase.selectUserReservation(showId, payload.id)
+
+        if(!checkReservation){
+            throw new NotFoundError("Você não possui reservas para esse show")
+        }
+
+        await this.showDatabase.removeReservation(showId, payload.id)
+        
+        const numberOfTicketsReserved = await this.showDatabase.selectReservedTickets(showId)
+        const newQuatity = checkIfShowExist.tickets + numberOfTicketsReserved + 1
+        await this.showDatabase.updateTicketsQuantity(newQuatity, showId)
+
+        const response = {
+            message: "Reserva cancelada",
         }
 
         return response

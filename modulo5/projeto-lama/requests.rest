@@ -44,3 +44,12 @@ Content-Type: application/json
     "showId": "38e2a263-d9c0-4bfc-b2f0-256368e2d498"
 }
 
+### 5) Delete Reservation 
+DELETE  http://localhost:3003/shows/deleteReservation
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDU1MTA2OSwiZXhwIjoxNjY0NjM3NDY5fQ.-nJd5_v0UqHSiwCReEez2p0riSg-2-J-Z29hG65eaZQ
+Content-Type: application/json
+
+{
+    "showId": "38e2a263-d9c0-4bfc-b2f0-256368e2d498"
+}
+

@@ -1,7 +1,8 @@
 export interface IShowDB {
     id: string,
     band: string,
-    starts_at: Date
+    starts_at: Date,
+    tickets: number
 }
 
 export interface ITicketDB {

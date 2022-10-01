@@ -61,4 +61,23 @@ export class ShowController {
         }
     }
 
+    public deleteReservation = async (req: Request, res: Response) =>{
+        try {
+            const input = {
+                token: req.headers.authorization,
+                showId: req.body.showId
+            }
+
+            const response = await this.showBusiness.deleteReservation(input)
+            res.status(200).send(response)
+            
+        } catch (error) {
+            if (error instanceof BaseError) {
+                return res.status(error.statusCode).send({ message: error.message })
+            }
+            res.status(500).send({ message: "Erro inesperado" })
+        }
+    }
+
+
 }

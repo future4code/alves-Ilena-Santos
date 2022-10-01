@@ -10,7 +10,8 @@ export class ShowDatabase extends BaseDatabase {
         const showDB: IShowDB = {
             id: show.getId(),
             band: show.getBand(),
-            starts_at: show.getStartsAt()
+            starts_at: show.getStartsAt(),
+            tickets: show.getTickets()
         }
 
         return showDB
@@ -60,7 +61,7 @@ export class ShowDatabase extends BaseDatabase {
             })
     }
 
-    public selectTicketsQuantity = async ( show_id:string) => {
+    public selectReservedTickets = async ( show_id:string): Promise<number> => {
 
         const result = await BaseDatabase.connection(ShowDatabase.TABLE_TICKETS)
         .select("*")
@@ -69,6 +70,32 @@ export class ShowDatabase extends BaseDatabase {
         })
 
         return result.length
+    }
+
+    public selectUserReservation = async ( show_id:string, user_id:string) => {
+
+        const result = await BaseDatabase.connection(ShowDatabase.TABLE_TICKETS)
+        .select("*")
+        .where({
+            show_id
+        })
+        .andWhere({
+            user_id
+        })
+
+        return result[0]
+    }
+
+    public removeReservation = async ( show_id:string, user_id:string) => {
+
+        await BaseDatabase.connection(ShowDatabase.TABLE_TICKETS)
+        .delete("*")
+        .where({
+            show_id
+        })
+        .andWhere({
+            user_id
+        })
     }
 
     public updateTicketsQuantity = async (tickets:number, showId: string) =>{

@@ -20,3 +20,4 @@ const showController = new ShowController(
 showRouter.post("/registerShow", showController.registerShow)
 showRouter.get("/getShows", showController.getShows)
 showRouter.post("/ticketReservation", showController.ticketReservation)
+showRouter.delete("/deleteReservation", showController.deleteReservation)
