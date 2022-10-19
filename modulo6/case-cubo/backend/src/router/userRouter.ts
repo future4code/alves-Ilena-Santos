@@ -8,8 +8,9 @@ export const userRouter = Router()
 
 const userController = new UserController(
     new UserBusiness(
-        new UserDatabase(),
-        new IdGenerator()
+        new UserDatabase()
     )
 )
 
+userRouter.post("/signup", userController.signup)
+userRouter.get("/", userController.getUsers)
